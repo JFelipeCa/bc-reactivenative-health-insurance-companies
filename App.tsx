@@ -25,7 +25,30 @@ const coverages: Coverage[] = [
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tabs = createBottomTabNavigator<TabParamList>();
 
-C:\Users\senafunction CoveragesScreen({ navigation }: { navigation: any }) {
+function HomeScreen({ navigation }: { navigation: any }) {
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.homeContent} showsVerticalScrollIndicator={false}>
+        <View style={styles.brandRow}><View style={styles.brandMark}><Text style={styles.brandMarkText}>+</Text></View><Text style={styles.brandName}>COBERTURA DE SALUD COLOMBIA</Text><Text style={styles.navLabel}>Inicio   Coberturas</Text></View>
+        <Text style={styles.eyebrow}>SEGUROS DE SALUD</Text>
+        <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
+        <View style={styles.hero}>
+          <Text style={styles.heroKicker}>COLOMBIA Â· EPS + IPS</Text>
+          <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
+          <Text style={styles.heroText}>Consulta opciones de cobertura y redes de atencion.</Text>
+        </View>
+        <Text style={styles.sectionTitle}>Encuentra tu cobertura</Text>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
+          <View><Text style={styles.actionTitle}>Explorar cobertura</Text><Text style={styles.actionText}>Consulta servicios y red IPS.</Text></View>
+          <Text style={styles.arrow}>â€º</Text>
+        </Pressable>
+        <View style={styles.benefits}><Text style={styles.sectionTitle}>Beneficios esenciales</Text><View style={styles.benefitRow}><Text style={styles.benefitPill}>âœ“ Medicina general</Text><Text style={styles.benefitPill}>âœ“ Urgencias 24/7</Text><Text style={styles.benefitPill}>âœ“ Telemedicina</Text></View></View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+function CoveragesScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const filtered = coverages.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
   return (

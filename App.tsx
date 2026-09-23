@@ -102,7 +102,7 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         data={filtered}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={<View><Text style={styles.eyebrow}>RED DE ATENCION</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar servicio o IPS..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando cobertura...' : 'Datos sincronizados'}</Text></View>}
-        refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#1E6F63" />}
+        refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#008F5A" />}
         ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Loading coverage...' : isError ? 'Coverage could not be loaded. Pull to retry.' : 'No coverage found.'}</Text>}
         renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
@@ -118,7 +118,7 @@ function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) 
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#1E6F63', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Coverage' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Coverage' }} /></Tabs.Navigator>;
 }
 
 export default function App() {
@@ -126,40 +126,40 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#F6F3EE' },
+  safeArea: { flex: 1, backgroundColor: '#F7FAF8' },
   homeContent: { flex: 1, gap: 18, padding: 22 },
   listContent: { gap: 12, padding: 22, paddingBottom: 36 },
   detailContent: { gap: 18, padding: 22 },
   formContent: { flex: 1, gap: 14, padding: 22 },
-  eyebrow: { color: '#1E6F63', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
-  title: { color: '#263B54', fontSize: 28, fontWeight: '800', marginTop: 7 },
-  hero: { backgroundColor: '#DDEDE5', borderRadius: 22, gap: 12, padding: 22, marginTop: 10 },
-  heroKicker: { color: '#1E6F63', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
-  heroTitle: { color: '#263B54', fontSize: 24, fontWeight: '800', lineHeight: 29 },
+  eyebrow: { color: '#008F5A', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
+  title: { color: '#075E43', fontSize: 28, fontWeight: '800', marginTop: 7 },
+  hero: { backgroundColor: '#DFF3E8', borderRadius: 22, gap: 12, padding: 22, marginTop: 10 },
+  heroKicker: { color: '#008F5A', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  heroTitle: { color: '#075E43', fontSize: 24, fontWeight: '800', lineHeight: 29 },
   heroText: { color: '#4E625E', fontSize: 14, lineHeight: 20 },
-  sectionTitle: { color: '#263B54', fontSize: 21, fontWeight: '800' },
+  sectionTitle: { color: '#075E43', fontSize: 21, fontWeight: '800' },
   actionCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 18 },
-  actionTitle: { color: '#263B54', fontSize: 17, fontWeight: '800' },
+  actionTitle: { color: '#075E43', fontSize: 17, fontWeight: '800' },
   actionText: { color: '#68716E', fontSize: 13, marginTop: 5 },
-  planHint: { color: '#1E6F63', fontSize: 12, fontWeight: '700', marginTop: 10 },
+  planHint: { color: '#008F5A', fontSize: 12, fontWeight: '700', marginTop: 10 },
   networkStatus: { color: '#77817E', fontSize: 11, marginTop: 10 },
   emptyText: { color: '#68716E', fontSize: 14, paddingVertical: 20, textAlign: 'center' },
-  arrow: { color: '#1E6F63', fontSize: 30, fontWeight: '300' },
-  infoCard: { backgroundColor: '#263B54', borderRadius: 18, gap: 7, padding: 19 },
-  infoKicker: { color: '#B8DACA', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  arrow: { color: '#008F5A', fontSize: 30, fontWeight: '300' },
+  infoCard: { backgroundColor: '#075E43', borderRadius: 18, gap: 7, padding: 19 },
+  infoKicker: { color: '#BDEBD3', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
   infoTitle: { color: '#FFF9F2', fontSize: 21, fontWeight: '800' },
-  infoText: { color: '#D6E1DD', fontSize: 13, lineHeight: 19 },
-  searchInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#263B54', fontSize: 14, marginTop: 18, padding: 14 },
-  formInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#263B54', fontSize: 15, padding: 14 },
+  infoText: { color: '#D8F0E3', fontSize: 13, lineHeight: 19 },
+  searchInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#075E43', fontSize: 14, marginTop: 18, padding: 14 },
+  formInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#075E43', fontSize: 15, padding: 14 },
   errorText: { color: '#B54232', fontSize: 12 },
-  successText: { color: '#1E6F63', fontSize: 13, fontWeight: '700' },
-  contactButton: { alignSelf: 'flex-start', backgroundColor: '#D86A3B', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
+  successText: { color: '#008F5A', fontSize: 13, fontWeight: '700' },
+  contactButton: { alignSelf: 'flex-start', backgroundColor: '#F2C94C', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
   coverageCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 16 },
   coverageCopy: { flex: 1, gap: 4 },
-  coverageCategory: { color: '#D86A3B', fontSize: 10, fontWeight: '800', letterSpacing: 1 },
-  coverageName: { color: '#263B54', fontSize: 17, fontWeight: '800' },
+  coverageCategory: { color: '#F2C94C', fontSize: 10, fontWeight: '800', letterSpacing: 1 },
+  coverageName: { color: '#075E43', fontSize: 17, fontWeight: '800' },
   coverageDetail: { color: '#68716E', fontSize: 12, lineHeight: 17 },
-  detailTitle: { color: '#263B54', fontSize: 32, fontWeight: '800' },
+  detailTitle: { color: '#075E43', fontSize: 32, fontWeight: '800' },
   detailText: { color: '#68716E', fontSize: 17, lineHeight: 26 },
 });

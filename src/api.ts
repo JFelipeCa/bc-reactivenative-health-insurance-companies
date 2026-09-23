@@ -9,6 +9,7 @@ type ProductResponse = {
   products: Array<{ id: number; title: string; description: string }>;
 };
 
+const coverageNames = ['Consulta general', 'Medicina familiar', 'Pediatria', 'Urgencias', 'Telemedicina', 'Odontologia', 'Salud mental', 'Laboratorio clinico', 'Maternidad', 'Chequeo anual'];
 const categories = ['Consulta', 'Especialidad', 'Prevencion', 'Bienestar'];
 
 export async function fetchCoverages(): Promise<RemoteCoverage[]> {
@@ -20,8 +21,8 @@ export async function fetchCoverages(): Promise<RemoteCoverage[]> {
   const payload = (await response.json()) as ProductResponse;
   return payload.products.map((product, index) => ({
     id: String(product.id),
-    name: product.title,
+    name: coverageNames[index] ?? product.title,
     category: categories[index % categories.length],
-    detail: product.description,
+    detail: `Servicio disponible en la red EPS e IPS. ${product.description}`,
   }));
 }

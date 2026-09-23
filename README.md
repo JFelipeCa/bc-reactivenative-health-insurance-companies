@@ -1,3 +1,25 @@
+# Health Insurance Coverage App
+
+Generic React Native learning app for the health insurance company domain. It models plans, covered services, favorites, and shared member state without representing a specific insurer.
+
+## Week 4: Global State
+
+### Goals
+
+- [x] Install and configure Zustand.
+- [x] Keep the active health plan in a shared store.
+- [x] Expose shared state across Home, Coverage, and Detail screens.
+- [x] Track favorite coverage identifiers in the store.
+
+Week 4 is complete on the `week-4` branch and ready for review.
+
+## Run with pnpm
+
+```bash
+pnpm install
+pnpm start
+pnpm typecheck
+```
 # Vitalia Salud
 
 Aplicacion móvil de una empresa de seguros de salud, desarrollada progresivamente a partir del bootcamp de React Native.

@@ -34,12 +34,12 @@ function HomeScreen({ navigation }: { navigation: any }) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
-        <Text style={styles.eyebrow}>HEALTH INSURANCE</Text>
-        <Text style={styles.title}>Coverage that supports your health.</Text>
+        <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+        <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
         <View style={styles.hero}>
-          <Text style={styles.heroKicker}>HEALTH COVERAGE</Text>
-          <Text style={styles.heroTitle}>A plan designed for your peace of mind.</Text>
-          <Text style={styles.heroText}>Explore covered services and understand your benefits.</Text>
+          <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+          <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
+          <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
         </View>
         <Text style={styles.sectionTitle}>Quick access</Text>
         <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>

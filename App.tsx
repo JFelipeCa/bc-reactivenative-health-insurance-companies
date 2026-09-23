@@ -9,7 +9,7 @@ import { fetchCoverages } from './src/api';
 import { useHealthStore } from './src/store';
 
 type Coverage = { id: string; name: string; category: string; detail: string };
-type RootStackParamList = { MainTabs: undefined; CoverageDetail: { coverage: Coverage }; Enrollment: undefined };
+type RootStackParamList = { Auth: undefined; MainTabs: undefined; CoverageDetail: { coverage: Coverage }; Enrollment: undefined };
 type TabParamList = { Home: undefined; Coverages: undefined };
 
 const coverages: Coverage[] = [
@@ -31,6 +31,7 @@ const queryClient = new QueryClient();
 
 function HomeScreen({ navigation }: { navigation: any }) {
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
+  const signOut = useHealthStore((state) => state.signOut);
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
@@ -51,9 +52,28 @@ function HomeScreen({ navigation }: { navigation: any }) {
           <Text style={styles.arrow}>›</Text>
         </Pressable>
         <View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Balanced protection for your everyday health needs. Your preference is saved locally.</Text></View>
+        <Pressable onPress={signOut}><Text style={styles.signOutText}>Sign out</Text></Pressable>
       </View>
     </SafeAreaView>
   );
+}
+
+function AuthScreen() {
+  const signIn = useHealthStore((state) => state.signIn);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const submit = () => {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 8) {
+      setError('Enter a valid email and a password with at least 8 characters.');
+      return;
+    }
+    setError('');
+    signIn();
+  };
+
+  return <SafeAreaView style={styles.safeArea}><View style={styles.formContent}><Text style={styles.eyebrow}>MEMBER ACCESS</Text><Text style={styles.title}>Sign in to your coverage</Text><TextInput value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" placeholder="Email address" placeholderTextColor="#8A918D" style={styles.formInput} /><TextInput value={password} onChangeText={setPassword} secureTextEntry placeholder="Password" placeholderTextColor="#8A918D" style={styles.formInput} />{error ? <Text style={styles.errorText}>{error}</Text> : null}<Pressable style={styles.contactButton} onPress={submit}><Text style={styles.contactButtonText}>Sign in</Text></Pressable></View></SafeAreaView>;
 }
 
 function EnrollmentScreen() {
@@ -122,7 +142,8 @@ function MainTabs() {
 }
 
 export default function App() {
-  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Coverage detail' }} /><Stack.Screen name="Enrollment" component={EnrollmentScreen} options={{ title: 'Enrollment' }} /></Stack.Navigator></NavigationContainer></QueryClientProvider>;
+  const isAuthenticated = useHealthStore((state) => state.isAuthenticated);
+  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator>{isAuthenticated ? <><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Coverage detail' }} /><Stack.Screen name="Enrollment" component={EnrollmentScreen} options={{ title: 'Enrollment' }} /></> : <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false }} />}</Stack.Navigator></NavigationContainer></QueryClientProvider>;
 }
 
 const styles = StyleSheet.create({
@@ -155,6 +176,7 @@ const styles = StyleSheet.create({
   successText: { color: '#1E6F63', fontSize: 13, fontWeight: '700' },
   contactButton: { alignSelf: 'flex-start', backgroundColor: '#D86A3B', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
+  signOutText: { color: '#1E6F63', fontSize: 13, fontWeight: '800', textAlign: 'center' },
   coverageCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 16 },
   coverageCopy: { flex: 1, gap: 4 },
   coverageCategory: { color: '#D86A3B', fontSize: 10, fontWeight: '800', letterSpacing: 1 },

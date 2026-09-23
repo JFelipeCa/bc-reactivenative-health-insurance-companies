@@ -2,18 +2,18 @@
 
 A React Native learning project for the health insurance company domain. The app is intentionally generic: users can explore insurance plans, search covered services, review coverage details, and see network data states without representing a specific insurer.
 
-## Week 7 Progress
+## Week 8 Progress
 
 ### Goals
 
-- [x] Persist the active plan with Zustand persist.
-- [x] Persist favorite coverage identifiers locally.
-- [x] Use AsyncStorage as the persistence adapter.
-- [x] Restore member preferences after the app restarts.
+- [x] Validate member email and password input.
+- [x] Protect the main navigation behind an authentication gate.
+- [x] Persist the authenticated session with the local store.
+- [x] Provide a sign-out action.
 
 ### Completed
 
-Week 7 is complete on the `week-7` branch. The implementation is ready for review before continuing to Week 8.
+Week 8 is complete on the `week-8` branch. The implementation is ready for review before continuing to Week 9.
 
 ## Weekly roadmap
 

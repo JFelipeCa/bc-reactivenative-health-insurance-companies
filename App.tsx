@@ -34,19 +34,19 @@ function HomeScreen({ navigation }: { navigation: any }) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
-        <Text style={styles.eyebrow}>VITALIA SALUD</Text>
-        <Text style={styles.title}>Tu salud, bien acompanada.</Text>
+        <Text style={styles.eyebrow}>HEALTH INSURANCE</Text>
+        <Text style={styles.title}>Coverage that supports your health.</Text>
         <View style={styles.hero}>
-          <Text style={styles.heroKicker}>PROTECCION QUE SE SIENTE</Text>
-          <Text style={styles.heroTitle}>Una cobertura pensada para tu tranquilidad.</Text>
-          <Text style={styles.heroText}>Consulta tus servicios y encuentra el respaldo que necesitas.</Text>
+          <Text style={styles.heroKicker}>HEALTH COVERAGE</Text>
+          <Text style={styles.heroTitle}>A plan designed for your peace of mind.</Text>
+          <Text style={styles.heroText}>Explore covered services and understand your benefits.</Text>
         </View>
-        <Text style={styles.sectionTitle}>Accesos rapidos</Text>
+        <Text style={styles.sectionTitle}>Quick access</Text>
         <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
-          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Consulta servicios por categoria.</Text></View>
+          <View><Text style={styles.actionTitle}>Explore coverage</Text><Text style={styles.actionText}>Browse services by category.</Text></View>
           <Text style={styles.arrow}>›</Text>
         </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Proteccion equilibrada para ti y las personas que mas quieres.</Text></View>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Balanced protection for your everyday health needs.</Text></View>
       </View>
     </SafeAreaView>
   );
@@ -64,9 +64,9 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>TU RESPALDO</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando coberturas...' : 'Datos sincronizados'}</Text></View>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>YOUR BENEFITS</Text><Text style={styles.title}>Coverage</Text><Text style={styles.planHint}>Active plan: {selectedPlan} · {favoriteCoverages.length} favorites</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search coverage..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Updating coverage...' : 'Data synchronized'}</Text></View>}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#1E6F63" />}
-        ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Cargando coberturas...' : isError ? 'No fue posible cargar las coberturas. Desliza para reintentar.' : 'No encontramos una cobertura.'}</Text>}
+        ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Loading coverage...' : isError ? 'Coverage could not be loaded. Pull to retry.' : 'No coverage found.'}</Text>}
         renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
@@ -77,7 +77,7 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
 function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) {
   const { coverage } = route.params;
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
-  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO: {selectedPlan.toUpperCase()}</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Un asesor puede confirmar condiciones, red medica y beneficios de esta cobertura.</Text></View></View></SafeAreaView>;
+  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN: {selectedPlan.toUpperCase()}</Text><Text style={styles.infoTitle}>Included in your plan</Text><Text style={styles.infoText}>Review eligibility, provider network, and benefits with your insurance representative.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {

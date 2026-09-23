@@ -14,7 +14,7 @@ const categories = ['Consulta', 'Especialidad', 'Prevencion', 'Bienestar'];
 export async function fetchCoverages(): Promise<RemoteCoverage[]> {
   const response = await fetch('https://dummyjson.com/products?limit=10');
   if (!response.ok) {
-    throw new Error('No fue posible cargar las coberturas.');
+    throw new Error('Coverage data could not be loaded.');
   }
 
   const payload = (await response.json()) as ProductResponse;

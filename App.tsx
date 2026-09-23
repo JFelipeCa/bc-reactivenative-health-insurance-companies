@@ -31,7 +31,7 @@ const plans: Plan[] = [
   },
   {
     id: 'family',
-    name: 'Family',
+    name: 'Familiar',
     price: '$159.900 COP / mes',
     accent: '#F2C94C',
     description: 'Proteccion para tu hogar con acceso a una red nacional.',
@@ -57,7 +57,7 @@ export default function App() {
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <View>
-            <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+            <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
             <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
           </View>
           <View style={styles.headerMark}>
@@ -74,7 +74,7 @@ export default function App() {
             </Text>
           </View>
           <Image
-            accessibilityLabel="Family during a healthcare consultation"
+            accessibilityLabel="Familiar during a healthcare consultation"
             source={{ uri: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=500' }}
             style={styles.heroImage}
           />
@@ -83,7 +83,7 @@ export default function App() {
         <View style={styles.sectionHeading}>
           <View>
             <Text style={styles.sectionEyebrow}>OPCIONES DE COBERTURA</Text>
-            <Text style={styles.sectionTitle}>Health plans</Text>
+            <Text style={styles.sectionTitle}>Planes de salud</Text>
           </View>
           <Text style={styles.counter}>03 opciones</Text>
         </View>
@@ -103,7 +103,7 @@ export default function App() {
                 <View style={styles.planBody}>
                   <View style={styles.planTopline}>
                     <Text style={styles.planName}>{plan.name}</Text>
-                    {isSelected ? <Text style={styles.selectedLabel}>SELECTED</Text> : null}
+                    {isSelected ? <Text style={styles.selectedLabel}>SELECCIONADO</Text> : null}
                   </View>
                   <Text style={styles.planPrice}>{plan.price}</Text>
                   <Text style={styles.planDescription}>{plan.description}</Text>

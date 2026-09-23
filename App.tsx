@@ -31,7 +31,7 @@ function HomeScreen({ navigation }: { navigation: any }) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
-        <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+        <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
         <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
         <View style={styles.hero}>
           <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
@@ -71,7 +71,7 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
 function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) {
   const { coverage } = route.params;
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
-  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>HEALTH COVERAGE COLOMBIA</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Consulta copago, red IPS y condiciones de atencion para este servicio.</Text></View></View></SafeAreaView>;
+  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>COBERTURA DE SALUD COLOMBIA</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Consulta copago, red IPS y condiciones de atencion para este servicio.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {

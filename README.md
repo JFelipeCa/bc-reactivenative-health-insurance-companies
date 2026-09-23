@@ -21,3 +21,14 @@ pnpm install
 pnpm start
 pnpm typecheck
 ```
+
+## Start and stop scripts
+
+From Git Bash, WSL, or another Bash shell:
+
+```bash
+./start.sh
+./stop.sh
+```
+
+Pass Expo arguments through `start.sh`, for example `./start.sh --web`. The Expo PID is stored in `.expo/expo.pid` and output is written to `.expo/expo.log`.

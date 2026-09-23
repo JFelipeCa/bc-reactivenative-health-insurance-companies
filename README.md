@@ -2,19 +2,18 @@
 
 A React Native learning project for the health insurance company domain. The app is intentionally generic: users can explore insurance plans, search covered services, review coverage details, and see network data states without representing a specific insurer.
 
-## Week 5 Progress
+## Week 7 Progress
 
 ### Goals
 
-- [x] Fetch coverage data from a remote HTTP endpoint.
-- [x] Configure a shared TanStack Query client.
-- [x] Show loading, error, synchronized, and retry states.
-- [x] Keep coverage search integrated with fetched data.
-- [x] Preserve global plan state with Zustand.
+- [x] Persist the active plan with Zustand persist.
+- [x] Persist favorite coverage identifiers locally.
+- [x] Use AsyncStorage as the persistence adapter.
+- [x] Restore member preferences after the app restarts.
 
 ### Completed
 
-Week 5 is complete on the `week-5` branch. The implementation is ready for review before continuing to Week 6.
+Week 7 is complete on the `week-7` branch. The implementation is ready for review before continuing to Week 8.
 
 ## Weekly roadmap
 

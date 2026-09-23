@@ -29,7 +29,67 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tabs = createBottomTabNavigator<TabParamList>();
 const queryClient = new QueryClient();
 
-C:\Users\senafunction CoveragesScreen({ navigation }: { navigation: any }) {
+function HomeScreen({ navigation }: { navigation: any }) {
+  const selectedPlan = useHealthStore((state) => state.selectedPlan);
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.homeContent} showsVerticalScrollIndicator={false}>
+        <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
+        <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
+        <View style={styles.hero}>
+          <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+          <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
+          <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
+        </View>
+        <Text style={styles.sectionTitle}>Accesos rápidos</Text>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
+          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categoría.</Text></View>
+          <Text style={styles.arrow}>â€º</Text>
+        </Pressable>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Enrollment')}>
+          <View><Text style={styles.actionTitle}>Solicitar afiliación</Text><Text style={styles.actionText}>Envía tus datos de afiliación.</Text></View>
+          <Text style={styles.arrow}>â€º</Text>
+        </Pressable>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Proteccion para tu hogar con copagos y red nacional. Tu preferencia se guarda localmente.</Text></View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+function EnrollmentScreen() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [memberId, setMemberId] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
+
+  const submit = () => {
+    const nextErrors: string[] = [];
+    if (name.trim().length < 2) nextErrors.push('Ingresa tu nombre completo.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.push('Ingresa un correo electrónico válido.');
+    if (!/^HI-\d{6}$/.test(memberId.trim())) nextErrors.push('Usa un número de afiliado como HI-123456.');
+    setErrors(nextErrors);
+    setSubmitted(nextErrors.length === 0);
+  };
+
+  return (
+    <KeyboardAvoidingView style={styles.safeArea} behavior="padding">
+      <View style={styles.formContent}>
+        <Text style={styles.eyebrow}>SOLICITUD DE AFILIACIÓN</Text>
+        <Text style={styles.title}>Solicitar cobertura</Text>
+        <Text style={styles.detailText}>Comparte tus datos y un asesor se pondrá en contacto contigo.</Text>
+        <TextInput value={name} onChangeText={setName} placeholder="Nombre completo" placeholderTextColor="#8A918D" style={styles.formInput} />
+        <TextInput value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" placeholder="Correo electrónico" placeholderTextColor="#8A918D" style={styles.formInput} />
+        <TextInput value={memberId} onChangeText={setMemberId} autoCapitalize="characters" placeholder="Número de afiliado (HI-123456)" placeholderTextColor="#8A918D" style={styles.formInput} />
+        {errors.map((error) => <Text key={error} style={styles.errorText}>{error}</Text>)}
+        {submitted ? <Text style={styles.successText}>Tu solicitud de afiliación está lista para revisión.</Text> : null}
+        <Pressable style={styles.contactButton} onPress={submit}><Text style={styles.contactButtonText}>Enviar solicitud</Text></Pressable>
+      </View>
+    </KeyboardAvoidingView>
+  );
+}
+
+function CoveragesScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   const favoriteCoverages = useHealthStore((state) => state.favoriteCoverages);

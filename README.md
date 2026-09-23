@@ -1,6 +1,6 @@
-# Health Insurance Coverage App
+# Health Coverage Colombia
 
-Generic React Native learning app for the health insurance company domain. It introduces plans and covered benefits without representing a specific insurer.
+Generic React Native learning app for the health insurance company domain in Colombia. It models plans, copayments, EPS/IPS networks, and covered benefits without representing a specific insurer.
 
 ## Week 1: Core Components and Flexbox
 

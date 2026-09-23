@@ -23,27 +23,27 @@ type Plan = {
 const plans: Plan[] = [
   {
     id: 'essential',
-    name: 'Essential',
-    price: '$89.900 / mes',
+    name: 'Individual',
+    price: '$89.900 COP / mes',
     accent: '#1E6F63',
-    description: 'Core coverage for everyday healthcare needs.',
-    benefits: ['General medicine', 'Emergency network', '24/7 telemedicine'],
+    description: 'Cobertura base para tus necesidades de salud en Colombia.',
+    benefits: ['Consulta general', 'Red de urgencias', 'Telemedicina 24/7'],
   },
   {
     id: 'family',
     name: 'Family',
-    price: '$159.900 / mes',
+    price: '$159.900 COP / mes',
     accent: '#D86A3B',
-    description: 'Balanced protection for you and your household.',
-    benefits: ['Everything essential', 'Pediatric care', 'Dental care'],
+    description: 'Proteccion para tu hogar con acceso a una red nacional.',
+    benefits: ['Consulta general', 'Pediatria incluida', 'Atencion odontologica'],
   },
   {
     id: 'premium',
-    name: 'Premium',
-    price: '$249.900 / mes',
+    name: 'Preferente',
+    price: '$249.900 COP / mes',
     accent: '#263B54',
-    description: 'Preferred health services with comprehensive support.',
-    benefits: ['Private room', 'Specialists without copay', 'Annual checkup'],
+    description: 'Acceso preferente a especialistas y servicios complementarios.',
+    benefits: ['Habitacion individual', 'Especialistas', 'Chequeo anual'],
   },
 ];
 
@@ -57,8 +57,8 @@ export default function App() {
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <View>
-            <Text style={styles.eyebrow}>HEALTH INSURANCE</Text>
-            <Text style={styles.title}>Coverage that supports your health.</Text>
+            <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+            <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
           </View>
           <View style={styles.headerMark}>
             <Text style={styles.headerMarkText}>+</Text>
@@ -67,10 +67,10 @@ export default function App() {
 
         <View style={styles.hero}>
           <View style={styles.heroCopy}>
-            <Text style={styles.heroKicker}>HEALTH COVERAGE</Text>
-            <Text style={styles.heroTitle}>Plans designed for your peace of mind.</Text>
+            <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+            <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
             <Text style={styles.heroText}>
-              Explore plans built around your healthcare needs.
+              Consulta opciones de cobertura y redes EPS e IPS.
             </Text>
           </View>
           <Image
@@ -82,7 +82,7 @@ export default function App() {
 
         <View style={styles.sectionHeading}>
           <View>
-            <Text style={styles.sectionEyebrow}>CHOOSE YOUR COVERAGE</Text>
+            <Text style={styles.sectionEyebrow}>OPCIONES DE COBERTURA</Text>
             <Text style={styles.sectionTitle}>Health plans</Text>
           </View>
           <Text style={styles.counter}>03 opciones</Text>
@@ -122,12 +122,12 @@ export default function App() {
 
         <View style={styles.summary}>
           <View>
-            <Text style={styles.summaryEyebrow}>YOUR SELECTION</Text>
+            <Text style={styles.summaryEyebrow}>PLAN SELECCIONADO</Text>
             <Text style={styles.summaryTitle}>{activePlan.name}</Text>
-            <Text style={styles.summaryText}>Review your plan benefits with a health insurance representative.</Text>
+            <Text style={styles.summaryText}>Consulta copagos, red IPS y condiciones de atencion.</Text>
           </View>
           <TouchableOpacity accessibilityRole="button" style={styles.contactButton} onPress={() => undefined}>
-            <Text style={styles.contactButtonText}>Contact a representative</Text>
+            <Text style={styles.contactButtonText}>Consultar plan</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

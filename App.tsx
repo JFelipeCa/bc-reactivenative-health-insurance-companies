@@ -50,7 +50,7 @@ function HomeScreen({ navigation }: { navigation: any }) {
           <View><Text style={styles.actionTitle}>Request enrollment</Text><Text style={styles.actionText}>Submit your member information.</Text></View>
           <Text style={styles.arrow}>›</Text>
         </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Balanced protection for your everyday health needs.</Text></View>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Balanced protection for your everyday health needs. Your preference is saved locally.</Text></View>
       </View>
     </SafeAreaView>
   );

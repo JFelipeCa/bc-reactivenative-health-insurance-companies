@@ -110,7 +110,7 @@ export default function App() {
                   <View style={styles.benefitRow}>
                     {plan.benefits.map((benefit) => (
                       <Text key={benefit} style={styles.benefit}>
-                        {`• ${benefit}`}
+                        {`â€¢ ${benefit}`}
                       </Text>
                     ))}
                   </View>

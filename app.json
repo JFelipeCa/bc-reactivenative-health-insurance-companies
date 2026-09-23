@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Vitalia Salud",
+    "slug": "vitalia-salud",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "vitaliasalud",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#EAF7F3"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

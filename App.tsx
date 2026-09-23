@@ -29,19 +29,20 @@ function HomeScreen({ navigation }: { navigation: any }) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
-        <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+        <View style={styles.brandRow}><View style={styles.brandMark}><Text style={styles.brandMarkText}>+</Text></View><Text style={styles.brandName}>HEALTH COVERAGE COLOMBIA</Text><Text style={styles.navLabel}>Inicio   Coberturas</Text></View>
+        <Text style={styles.eyebrow}>SEGUROS DE SALUD</Text>
         <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
         <View style={styles.hero}>
-          <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+          <Text style={styles.heroKicker}>COLOMBIA · EPS + IPS</Text>
           <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
-          <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
+          <Text style={styles.heroText}>Consulta opciones de cobertura y redes de atencion.</Text>
         </View>
-        <Text style={styles.sectionTitle}>Accesos rapidos</Text>
+        <Text style={styles.sectionTitle}>Encuentra tu cobertura</Text>
         <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
           <View><Text style={styles.actionTitle}>Explorar cobertura</Text><Text style={styles.actionText}>Consulta servicios y red IPS.</Text></View>
           <Text style={styles.arrow}>›</Text>
         </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN FAMILIAR</Text><Text style={styles.infoTitle}>Tu eleccion actual</Text><Text style={styles.infoText}>Proteccion para tu hogar con copagos y red nacional.</Text></View>
+        <View style={styles.benefits}><Text style={styles.sectionTitle}>Beneficios esenciales</Text><View style={styles.benefitRow}><Text style={styles.benefitPill}>✓ Medicina general</Text><Text style={styles.benefitPill}>✓ Urgencias 24/7</Text><Text style={styles.benefitPill}>✓ Telemedicina</Text></View></View>
       </View>
     </SafeAreaView>
   );
@@ -84,15 +85,23 @@ const styles = StyleSheet.create({
   detailContent: { gap: 18, padding: 22 },
   eyebrow: { color: '#1E6F63', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
   title: { color: '#263B54', fontSize: 28, fontWeight: '800', marginTop: 7 },
-  hero: { backgroundColor: '#DDEDE5', borderRadius: 22, gap: 12, padding: 22, marginTop: 10 },
-  heroKicker: { color: '#1E6F63', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
-  heroTitle: { color: '#263B54', fontSize: 24, fontWeight: '800', lineHeight: 29 },
-  heroText: { color: '#4E625E', fontSize: 14, lineHeight: 20 },
+  brandRow: { alignItems: 'center', flexDirection: 'row', gap: 8, marginBottom: 8 },
+  brandMark: { alignItems: 'center', backgroundColor: '#009B63', borderRadius: 16, height: 32, justifyContent: 'center', width: 32 },
+  brandMarkText: { color: '#FFFFFF', fontSize: 21, fontWeight: '800' },
+  brandName: { color: '#173B35', flex: 1, fontSize: 10, fontWeight: '800', letterSpacing: 1 },
+  navLabel: { color: '#63736E', fontSize: 9 },
+  hero: { backgroundColor: '#008F5B', borderRadius: 22, gap: 12, padding: 22, marginTop: 10 },
+  heroKicker: { color: '#D6F5E8', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  heroTitle: { color: '#FFFFFF', fontSize: 24, fontWeight: '800', lineHeight: 29 },
+  heroText: { color: '#E3FFF2', fontSize: 14, lineHeight: 20 },
   sectionTitle: { color: '#263B54', fontSize: 21, fontWeight: '800' },
-  actionCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 18 },
+  actionCard: { alignItems: 'center', backgroundColor: '#FFFFFF', borderColor: '#DDE8E2', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 18 },
   actionTitle: { color: '#263B54', fontSize: 17, fontWeight: '800' },
   actionText: { color: '#68716E', fontSize: 13, marginTop: 5 },
   arrow: { color: '#1E6F63', fontSize: 30, fontWeight: '300' },
+  benefits: { gap: 10 },
+  benefitRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  benefitPill: { backgroundColor: '#FFF2B8', borderRadius: 18, color: '#35564B', fontSize: 12, fontWeight: '700', paddingHorizontal: 12, paddingVertical: 9 },
   infoCard: { backgroundColor: '#263B54', borderRadius: 18, gap: 7, padding: 19 },
   infoKicker: { color: '#B8DACA', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
   infoTitle: { color: '#FFF9F2', fontSize: 21, fontWeight: '800' },

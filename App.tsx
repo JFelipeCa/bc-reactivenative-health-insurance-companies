@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { FlatList, KeyboardAvoidingView, Pressable, RefreshControl, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Animated, Easing, FlatList, KeyboardAvoidingView, Pressable, RefreshControl, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { fetchCoverages } from './src/api';
 import { useHealthStore } from './src/store';
 
@@ -32,25 +32,36 @@ const queryClient = new QueryClient();
 function HomeScreen({ navigation }: { navigation: any }) {
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   const signOut = useHealthStore((state) => state.signOut);
+  const entrance = useRef(new Animated.Value(0)).current;
+  const slide = useRef(new Animated.Value(18)).current;
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(entrance, { toValue: 1, duration: 550, easing: Easing.out(Easing.cubic), useNativeDriver: true }),
+      Animated.timing(slide, { toValue: 0, duration: 550, easing: Easing.out(Easing.cubic), useNativeDriver: true }),
+    ]).start();
+  }, [entrance, slide]);
+
+  const animatedStyle = { opacity: entrance, transform: [{ translateY: slide }] };
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
         <Text style={styles.eyebrow}>HEALTH INSURANCE</Text>
         <Text style={styles.title}>Coverage that supports your health.</Text>
-        <View style={styles.hero}>
+        <Animated.View style={[styles.hero, animatedStyle]}>
           <Text style={styles.heroKicker}>HEALTH COVERAGE</Text>
           <Text style={styles.heroTitle}>A plan designed for your peace of mind.</Text>
           <Text style={styles.heroText}>Explore covered services and understand your benefits.</Text>
-        </View>
+        </Animated.View>
         <Text style={styles.sectionTitle}>Quick access</Text>
-        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
+        <Animated.View style={animatedStyle}><Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
           <View><Text style={styles.actionTitle}>Explore coverage</Text><Text style={styles.actionText}>Browse services by category.</Text></View>
           <Text style={styles.arrow}>›</Text>
-        </Pressable>
-        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Enrollment')}>
+        </Pressable></Animated.View>
+        <Animated.View style={animatedStyle}><Pressable style={styles.actionCard} onPress={() => navigation.navigate('Enrollment')}>
           <View><Text style={styles.actionTitle}>Request enrollment</Text><Text style={styles.actionText}>Submit your member information.</Text></View>
           <Text style={styles.arrow}>›</Text>
-        </Pressable>
+        </Pressable></Animated.View>
         <View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Balanced protection for your everyday health needs. Your preference is saved locally.</Text></View>
         <Pressable onPress={signOut}><Text style={styles.signOutText}>Sign out</Text></Pressable>
       </View>

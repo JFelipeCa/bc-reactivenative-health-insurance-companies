@@ -2,18 +2,18 @@
 
 A React Native learning project for the health insurance company domain. The app is intentionally generic: users can explore insurance plans, search covered services, review coverage details, and see network data states without representing a specific insurer.
 
-## Week 8 Progress
+## Week 9 Progress
 
 ### Goals
 
-- [x] Validate member email and password input.
-- [x] Protect the main navigation behind an authentication gate.
-- [x] Persist the authenticated session with the local store.
-- [x] Provide a sign-out action.
+- [x] Animate the Home hero on screen entry.
+- [x] Animate quick-access cards with a shared transition value.
+- [x] Use native-driver-compatible opacity and translation animations.
+- [x] Keep animation setup isolated from navigation and data fetching.
 
 ### Completed
 
-Week 8 is complete on the `week-8` branch. The implementation is ready for review before continuing to Week 9.
+Week 9 is complete on the `week-9` branch. The implementation is ready for review before continuing to Week 10.
 
 ## Weekly roadmap
 

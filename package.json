@@ -1,5 +1,5 @@
 {
-  "name": "vitalia-salud",
+  "name": "health-insurance-coverage-app",
   "version": "1.0.0",
   "private": true,
   "main": "expo/AppEntry.js",
@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate": "pnpm typecheck"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",

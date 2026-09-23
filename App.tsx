@@ -154,7 +154,7 @@ function MainTabs() {
 
 export default function App() {
   const isAuthenticated = useHealthStore((state) => state.isAuthenticated);
-  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator>{isAuthenticated ? <><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Detalle de cobertura' }} /><Stack.Screen name="Enrollment" component={EnrollmentScreen} options={{ title: 'Enrollment' }} /></> : <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false }} />}</Stack.Navigator></NavigationContainer></QueryClientProvider>;
+  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator>{isAuthenticated ? <><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Detalle de cobertura' }} /><Stack.Screen name="Enrollment" component={EnrollmentScreen} options={{ title: 'Afiliación' }} /></> : <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false }} />}</Stack.Navigator></NavigationContainer></QueryClientProvider>;
 }
 
 const styles = StyleSheet.create({

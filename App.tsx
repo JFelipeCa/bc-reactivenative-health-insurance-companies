@@ -22,33 +22,33 @@ type Plan = {
 
 const plans: Plan[] = [
   {
-    id: 'esencial',
-    name: 'Esencial',
+    id: 'essential',
+    name: 'Essential',
     price: '$89.900 / mes',
     accent: '#1E6F63',
-    description: 'La cobertura necesaria para cuidar tu salud todos los dias.',
-    benefits: ['Medicina general', 'Red de urgencias', 'Telemedicina 24/7'],
+    description: 'Core coverage for everyday healthcare needs.',
+    benefits: ['General medicine', 'Emergency network', '24/7 telemedicine'],
   },
   {
-    id: 'familiar',
-    name: 'Familiar',
+    id: 'family',
+    name: 'Family',
     price: '$159.900 / mes',
     accent: '#D86A3B',
-    description: 'Proteccion equilibrada para ti y las personas que mas quieres.',
-    benefits: ['Todo lo esencial', 'Pediatria incluida', 'Atencion odontologica'],
+    description: 'Balanced protection for you and your household.',
+    benefits: ['Everything essential', 'Pediatric care', 'Dental care'],
   },
   {
     id: 'premium',
     name: 'Premium',
     price: '$249.900 / mes',
     accent: '#263B54',
-    description: 'Una experiencia de salud preferente con respaldo completo.',
-    benefits: ['Habitacion individual', 'Especialistas sin copago', 'Chequeo anual'],
+    description: 'Preferred health services with comprehensive support.',
+    benefits: ['Private room', 'Specialists without copay', 'Annual checkup'],
   },
 ];
 
 export default function App() {
-  const [selectedPlan, setSelectedPlan] = useState('familiar');
+  const [selectedPlan, setSelectedPlan] = useState('family');
   const activePlan = plans.find((plan) => plan.id === selectedPlan) ?? plans[1];
 
   return (
@@ -57,8 +57,8 @@ export default function App() {
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <View>
-            <Text style={styles.eyebrow}>VITALIA SALUD</Text>
-            <Text style={styles.title}>Tu salud, bien acompañada.</Text>
+            <Text style={styles.eyebrow}>HEALTH INSURANCE</Text>
+            <Text style={styles.title}>Coverage that supports your health.</Text>
           </View>
           <View style={styles.headerMark}>
             <Text style={styles.headerMarkText}>+</Text>
@@ -67,14 +67,14 @@ export default function App() {
 
         <View style={styles.hero}>
           <View style={styles.heroCopy}>
-            <Text style={styles.heroKicker}>PROTECCION QUE SE SIENTE</Text>
-            <Text style={styles.heroTitle}>Coberturas pensadas para tu tranquilidad.</Text>
+            <Text style={styles.heroKicker}>HEALTH COVERAGE</Text>
+            <Text style={styles.heroTitle}>Plans designed for your peace of mind.</Text>
             <Text style={styles.heroText}>
-              Encuentra el respaldo que necesitas para cada etapa de tu vida.
+              Explore plans built around your healthcare needs.
             </Text>
           </View>
           <Image
-            accessibilityLabel="Familia sonriendo durante una consulta de salud"
+            accessibilityLabel="Family during a healthcare consultation"
             source={{ uri: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=500' }}
             style={styles.heroImage}
           />
@@ -82,8 +82,8 @@ export default function App() {
 
         <View style={styles.sectionHeading}>
           <View>
-            <Text style={styles.sectionEyebrow}>ELIGE TU RESPALDO</Text>
-            <Text style={styles.sectionTitle}>Planes de salud</Text>
+            <Text style={styles.sectionEyebrow}>CHOOSE YOUR COVERAGE</Text>
+            <Text style={styles.sectionTitle}>Health plans</Text>
           </View>
           <Text style={styles.counter}>03 opciones</Text>
         </View>
@@ -103,7 +103,7 @@ export default function App() {
                 <View style={styles.planBody}>
                   <View style={styles.planTopline}>
                     <Text style={styles.planName}>{plan.name}</Text>
-                    {isSelected ? <Text style={styles.selectedLabel}>SELECCIONADO</Text> : null}
+                    {isSelected ? <Text style={styles.selectedLabel}>SELECTED</Text> : null}
                   </View>
                   <Text style={styles.planPrice}>{plan.price}</Text>
                   <Text style={styles.planDescription}>{plan.description}</Text>
@@ -122,12 +122,12 @@ export default function App() {
 
         <View style={styles.summary}>
           <View>
-            <Text style={styles.summaryEyebrow}>TU ELECCION</Text>
+            <Text style={styles.summaryEyebrow}>YOUR SELECTION</Text>
             <Text style={styles.summaryTitle}>{activePlan.name}</Text>
-            <Text style={styles.summaryText}>Un asesor puede ayudarte a elegir la mejor cobertura.</Text>
+            <Text style={styles.summaryText}>Review your plan benefits with a health insurance representative.</Text>
           </View>
           <TouchableOpacity accessibilityRole="button" style={styles.contactButton} onPress={() => undefined}>
-            <Text style={styles.contactButtonText}>Hablar con un asesor</Text>
+            <Text style={styles.contactButtonText}>Contact a representative</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

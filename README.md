@@ -32,3 +32,4 @@ From Git Bash, WSL, or another Bash shell:
 ```
 
 Pass Expo arguments through `start.sh`, for example `./start.sh --web`. The Expo PID is stored in `.expo/expo.pid` and output is written to `.expo/expo.log`.
+If port `8081` is busy, the script automatically selects the next available port. Set `EXPO_PORT` to choose a starting port manually.

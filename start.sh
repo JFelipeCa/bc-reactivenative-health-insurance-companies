@@ -6,6 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RUNTIME_DIR="$ROOT_DIR/.expo"
 PID_FILE="$RUNTIME_DIR/expo.pid"
 LOG_FILE="$RUNTIME_DIR/expo.log"
+EXPO_PORT="${EXPO_PORT:-8081}"
 
 cd "$ROOT_DIR"
 mkdir -p "$RUNTIME_DIR"
@@ -30,11 +31,25 @@ if [ -f "$PID_FILE" ]; then
   rm -f "$PID_FILE"
 fi
 
+port_is_in_use() {
+  if command -v netstat >/dev/null 2>&1; then
+    netstat -ano 2>/dev/null | grep -Eq ":${1}[[:space:]].*LISTENING"
+  elif command -v ss >/dev/null 2>&1; then
+    ss -ltn 2>/dev/null | grep -Eq ":${1}[[:space:]]"
+  else
+    return 1
+  fi
+}
+
+while port_is_in_use "$EXPO_PORT"; do
+  EXPO_PORT=$((EXPO_PORT + 1))
+done
+
 echo "Starting Expo..."
-nohup pnpm exec expo start "$@" >"$LOG_FILE" 2>&1 &
+nohup pnpm exec expo start --port "$EXPO_PORT" "$@" >"$LOG_FILE" 2>&1 &
 expo_pid=$!
 echo "$expo_pid" > "$PID_FILE"
 
-echo "Expo started with PID $expo_pid."
+echo "Expo started with PID $expo_pid on port $EXPO_PORT."
 echo "Log: $LOG_FILE"
 echo "Stop it with: ./stop.sh"

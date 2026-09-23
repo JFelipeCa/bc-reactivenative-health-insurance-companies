@@ -31,19 +31,19 @@ function HomeScreen({ navigation }: { navigation: any }) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
-        <Text style={styles.eyebrow}>VITALIA SALUD</Text>
-        <Text style={styles.title}>Tu salud, bien acompanada.</Text>
+        <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+        <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
         <View style={styles.hero}>
-          <Text style={styles.heroKicker}>PROTECCION QUE SE SIENTE</Text>
-          <Text style={styles.heroTitle}>Una cobertura pensada para tu tranquilidad.</Text>
-          <Text style={styles.heroText}>Consulta tus servicios y encuentra el respaldo que necesitas.</Text>
+          <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+          <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
+          <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
         </View>
         <Text style={styles.sectionTitle}>Accesos rapidos</Text>
         <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
-          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Consulta servicios por categoria.</Text></View>
+          <View><Text style={styles.actionTitle}>Explorar cobertura</Text><Text style={styles.actionText}>Consulta servicios y red IPS.</Text></View>
           <Text style={styles.arrow}>›</Text>
         </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Proteccion equilibrada para ti y las personas que mas quieres.</Text></View>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Proteccion para tu hogar con copagos y red nacional.</Text></View>
       </View>
     </SafeAreaView>
   );
@@ -60,7 +60,7 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>TU RESPALDO</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /></View>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>RED DE ATENCION</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar servicio o IPS..." placeholderTextColor="#8A918D" style={styles.searchInput} /></View>}
         renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
@@ -71,7 +71,7 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
 function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) {
   const { coverage } = route.params;
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
-  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO: {selectedPlan.toUpperCase()}</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Un asesor puede confirmar condiciones, red medica y beneficios de esta cobertura.</Text></View></View></SafeAreaView>;
+  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>HEALTH COVERAGE COLOMBIA</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Consulta copago, red IPS y condiciones de atencion para este servicio.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {

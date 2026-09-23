@@ -15,7 +15,7 @@ const categories = ['Consulta', 'Especialidad', 'Prevencion', 'Bienestar'];
 export async function fetchCoverages(): Promise<RemoteCoverage[]> {
   const response = await fetch('https://dummyjson.com/products?limit=10');
   if (!response.ok) {
-    throw new Error('Coverage data could not be loaded.');
+    throw new Error('No se pudieron cargar los datos de cobertura.');
   }
 
   const payload = (await response.json()) as ProductResponse;
@@ -23,6 +23,6 @@ export async function fetchCoverages(): Promise<RemoteCoverage[]> {
     id: String(product.id),
     name: coverageNames[index] ?? product.title,
     category: categories[index % categories.length],
-    detail: `Servicio disponible en la red EPS e IPS. ${product.description}`,
+    detail: `Servicio disponible en la red EPS e IPS.`,
   }));
 }

@@ -31,22 +31,22 @@ type Coverage = {
 };
 
 const plans: Plan[] = [
-  { id: 'esencial', name: 'Esencial', price: '$89.900 / mes', accent: '#1E6F63', description: 'La cobertura necesaria para cuidar tu salud todos los dias.', benefits: ['Medicina general', 'Red de urgencias', 'Telemedicina 24/7'] },
-  { id: 'familiar', name: 'Familiar', price: '$159.900 / mes', accent: '#D86A3B', description: 'Proteccion equilibrada para ti y las personas que mas quieres.', benefits: ['Todo lo esencial', 'Pediatria incluida', 'Atencion odontologica'] },
-  { id: 'premium', name: 'Premium', price: '$249.900 / mes', accent: '#263B54', description: 'Una experiencia de salud preferente con respaldo completo.', benefits: ['Habitacion individual', 'Especialistas sin copago', 'Chequeo anual'] },
+  { id: 'individual', name: 'Individual', price: '$89.900 COP / mes', accent: '#1E6F63', description: 'Cobertura base para tus necesidades de salud en Colombia.', benefits: ['Consulta general', 'Red de urgencias', 'Telemedicina 24/7'] },
+  { id: 'familiar', name: 'Familiar', price: '$159.900 COP / mes', accent: '#D86A3B', description: 'Proteccion para tu hogar con acceso a una red nacional.', benefits: ['Consulta general', 'Pediatria incluida', 'Atencion odontologica'] },
+  { id: 'preferente', name: 'Preferente', price: '$249.900 COP / mes', accent: '#263B54', description: 'Acceso preferente a especialistas y servicios complementarios.', benefits: ['Habitacion individual', 'Especialistas', 'Chequeo anual'] },
 ];
 
 const coverages: Coverage[] = [
-  { id: '1', name: 'Medicina general', category: 'Consulta', detail: 'Citas presenciales y virtuales.', icon: '+' },
-  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Acompanamiento para todo el hogar.', icon: '⌂' },
-  { id: '3', name: 'Pediatria', category: 'Especialidad', detail: 'Cuidado especializado para ninos.', icon: '♡' },
-  { id: '4', name: 'Urgencias', category: 'Atencion inmediata', detail: 'Red disponible las 24 horas.', icon: '+' },
-  { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Habla con un profesional desde casa.', icon: 'o' },
-  { id: '6', name: 'Odontologia', category: 'Bienestar', detail: 'Prevencion y tratamientos dentales.', icon: '◇' },
+  { id: '1', name: 'Consulta general', category: 'Consulta', detail: 'Citas presenciales y virtuales en tu red de atencion.', icon: '+' },
+  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Acompanamiento para todos los miembros del hogar.', icon: '⌂' },
+  { id: '3', name: 'Pediatria', category: 'Especialidad', detail: 'Atencion especializada para ninos y adolescentes.', icon: '♡' },
+  { id: '4', name: 'Urgencias', category: 'Atencion inmediata', detail: 'Red IPS disponible las 24 horas.', icon: '+' },
+  { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Consulta desde casa con profesionales de tu red.', icon: 'o' },
+  { id: '6', name: 'Odontologia', category: 'Bienestar', detail: 'Prevencion y tratamientos con copago informado.', icon: '◇' },
   { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Psicologia y acompanamiento emocional.', icon: 'o' },
-  { id: '8', name: 'Laboratorio', category: 'Diagnostico', detail: 'Examenes con tarifas preferenciales.', icon: '#' },
+  { id: '8', name: 'Laboratorio clinico', category: 'Diagnostico', detail: 'Examenes en IPS autorizadas.', icon: '#' },
   { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompanamiento antes y despues del parto.', icon: '♡' },
-  { id: '10', name: 'Chequeo anual', category: 'Prevencion', detail: 'Una revision completa cada ano.', icon: '✓' },
+  { id: '10', name: 'Chequeo anual', category: 'Prevencion', detail: 'Revision completa con tu red de atencion.', icon: '✓' },
 ];
 
 export default function App() {
@@ -77,16 +77,16 @@ export default function App() {
           <View style={styles.headerContent}>
             <View style={styles.header}>
               <View>
-                <Text style={styles.eyebrow}>VITALIA SALUD</Text>
-                <Text style={styles.title}>Tu salud, bien acompanada.</Text>
+                <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+                <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
               </View>
               <View style={styles.headerMark}><Text style={styles.headerMarkText}>+</Text></View>
             </View>
             <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text style={styles.heroKicker}>PROTECCION QUE SE SIENTE</Text>
-                <Text style={styles.heroTitle}>Coberturas para tu tranquilidad.</Text>
-                <Text style={styles.heroText}>Explora los servicios incluidos en nuestros planes.</Text>
+                <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+                <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
+                <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
               </View>
               <Image
                 accessibilityLabel="Familia durante una consulta de salud"
@@ -95,7 +95,7 @@ export default function App() {
               />
             </View>
             <View style={styles.sectionHeading}>
-              <View><Text style={styles.sectionEyebrow}>ELIGE TU RESPALDO</Text><Text style={styles.sectionTitle}>Planes de salud</Text></View>
+              <View><Text style={styles.sectionEyebrow}>OPCIONES DE COBERTURA</Text><Text style={styles.sectionTitle}>Planes de salud</Text></View>
               <Text style={styles.counter}>03 opciones</Text>
             </View>
             <View style={styles.planList}>
@@ -115,7 +115,7 @@ export default function App() {
               })}
             </View>
             <View style={styles.coverageHeading}>
-              <View><Text style={styles.sectionEyebrow}>CONOCE TU COBERTURA</Text><Text style={styles.sectionTitle}>Servicios incluidos</Text></View>
+              <View><Text style={styles.sectionEyebrow}>RED DE ATENCION</Text><Text style={styles.sectionTitle}>Servicios incluidos</Text></View>
               <Text style={styles.counter}>{filteredCoverages.length} resultados</Text>
             </View>
             <TextInput accessibilityLabel="Buscar cobertura" onChangeText={setQuery} placeholder="Busca medicina, urgencias..." placeholderTextColor="#8A918D" style={styles.searchInput} value={query} />
@@ -131,8 +131,8 @@ export default function App() {
         )}
         ListFooterComponent={
           <View style={styles.summary}>
-            <View><Text style={styles.summaryEyebrow}>TU ELECCION</Text><Text style={styles.summaryTitle}>{activePlan.name}</Text><Text style={styles.summaryText}>Un asesor puede ayudarte a elegir la mejor cobertura.</Text></View>
-            <TouchableOpacity accessibilityRole="button" style={styles.contactButton} onPress={() => undefined}><Text style={styles.contactButtonText}>Hablar con un asesor</Text></TouchableOpacity>
+            <View><Text style={styles.summaryEyebrow}>PLAN SELECCIONADO</Text><Text style={styles.summaryTitle}>{activePlan.name}</Text><Text style={styles.summaryText}>Consulta copagos, red IPS y condiciones de atencion para este plan.</Text></View>
+            <TouchableOpacity accessibilityRole="button" style={styles.contactButton} onPress={() => undefined}><Text style={styles.contactButtonText}>Consultar plan</Text></TouchableOpacity>
           </View>
         }
         showsVerticalScrollIndicator={false}

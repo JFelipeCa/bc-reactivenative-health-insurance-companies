@@ -7,6 +7,12 @@ RUNTIME_DIR="$ROOT_DIR/.expo"
 PID_FILE="$RUNTIME_DIR/expo.pid"
 LOG_FILE="$RUNTIME_DIR/expo.log"
 EXPO_PORT="${EXPO_PORT:-8081}"
+BACKGROUND=false
+
+if [ "${1:-}" = "--background" ]; then
+  BACKGROUND=true
+  shift
+fi
 
 cd "$ROOT_DIR"
 mkdir -p "$RUNTIME_DIR"
@@ -44,10 +50,14 @@ while port_is_in_use "$EXPO_PORT"; do
 done
 
 echo "Starting Expo..."
-nohup pnpm exec expo start --port "$EXPO_PORT" "$@" >"$LOG_FILE" 2>&1 &
-expo_pid=$!
-echo "$expo_pid" > "$PID_FILE"
-
-echo "Expo started with PID $expo_pid on port $EXPO_PORT."
-echo "Log: $LOG_FILE"
-echo "Stop it with: ./stop.sh"
+if [ "$BACKGROUND" = true ]; then
+  nohup pnpm exec expo start --port "$EXPO_PORT" "$@" >"$LOG_FILE" 2>&1 &
+  expo_pid=$!
+  echo "$expo_pid" > "$PID_FILE"
+  echo "Expo started in background with PID $expo_pid on port $EXPO_PORT."
+  echo "Log: $LOG_FILE"
+  echo "Stop it with: ./stop.sh"
+else
+  echo "Expo is running in the foreground. Press Ctrl+C to stop it."
+  exec pnpm exec expo start --port "$EXPO_PORT" "$@"
+fi

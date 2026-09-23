@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { FlatList, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useHealthStore } from './src/store';
 
 type Coverage = { id: string; name: string; category: string; detail: string };
 type RootStackParamList = { MainTabs: undefined; CoverageDetail: { coverage: Coverage } };
@@ -26,6 +27,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tabs = createBottomTabNavigator<TabParamList>();
 
 function HomeScreen({ navigation }: { navigation: any }) {
+  const selectedPlan = useHealthStore((state) => state.selectedPlan);
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
@@ -41,7 +43,7 @@ function HomeScreen({ navigation }: { navigation: any }) {
           <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Consulta servicios por categoria.</Text></View>
           <Text style={styles.arrow}>›</Text>
         </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN FAMILIAR</Text><Text style={styles.infoTitle}>Tu eleccion actual</Text><Text style={styles.infoText}>Proteccion equilibrada para ti y las personas que mas quieres.</Text></View>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Proteccion equilibrada para ti y las personas que mas quieres.</Text></View>
       </View>
     </SafeAreaView>
   );
@@ -49,6 +51,8 @@ function HomeScreen({ navigation }: { navigation: any }) {
 
 function CoveragesScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
+  const selectedPlan = useHealthStore((state) => state.selectedPlan);
+  const favoriteCoverages = useHealthStore((state) => state.favoriteCoverages);
   const filtered = coverages.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -56,7 +60,7 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>TU RESPALDO</Text><Text style={styles.title}>Coberturas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /></View>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>TU RESPALDO</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /></View>}
         renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
@@ -66,7 +70,8 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
 
 function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) {
   const { coverage } = route.params;
-  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>VITALIA SALUD</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Un asesor puede confirmar condiciones, red medica y beneficios de esta cobertura.</Text></View></View></SafeAreaView>;
+  const selectedPlan = useHealthStore((state) => state.selectedPlan);
+  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO: {selectedPlan.toUpperCase()}</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Un asesor puede confirmar condiciones, red medica y beneficios de esta cobertura.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {
@@ -92,6 +97,7 @@ const styles = StyleSheet.create({
   actionCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 18 },
   actionTitle: { color: '#263B54', fontSize: 17, fontWeight: '800' },
   actionText: { color: '#68716E', fontSize: 13, marginTop: 5 },
+  planHint: { color: '#1E6F63', fontSize: 12, fontWeight: '700', marginTop: 10 },
   arrow: { color: '#1E6F63', fontSize: 30, fontWeight: '300' },
   infoCard: { backgroundColor: '#263B54', borderRadius: 18, gap: 7, padding: 19 },
   infoKicker: { color: '#B8DACA', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },

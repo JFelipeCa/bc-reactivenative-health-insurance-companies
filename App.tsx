@@ -1,9 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { FlatList, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, Pressable, RefreshControl, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { fetchCoverages } from './src/api';
 import { useHealthStore } from './src/store';
 
 type Coverage = { id: string; name: string; category: string; detail: string };
@@ -25,6 +27,7 @@ const coverages: Coverage[] = [
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tabs = createBottomTabNavigator<TabParamList>();
+const queryClient = new QueryClient();
 
 function HomeScreen({ navigation }: { navigation: any }) {
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
@@ -53,14 +56,17 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   const favoriteCoverages = useHealthStore((state) => state.favoriteCoverages);
-  const filtered = coverages.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
+  const { data = [], isError, isFetching, isLoading, refetch } = useQuery({ queryKey: ['coverages'], queryFn: fetchCoverages });
+  const filtered = data.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
   return (
     <SafeAreaView style={styles.safeArea}>
       <FlatList
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>TU RESPALDO</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /></View>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>TU RESPALDO</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando coberturas...' : 'Datos sincronizados'}</Text></View>}
+        refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#1E6F63" />}
+        ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Cargando coberturas...' : isError ? 'No fue posible cargar las coberturas. Desliza para reintentar.' : 'No encontramos una cobertura.'}</Text>}
         renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
@@ -79,7 +85,7 @@ function MainTabs() {
 }
 
 export default function App() {
-  return <NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Detalle' }} /></Stack.Navigator></NavigationContainer>;
+  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Detalle' }} /></Stack.Navigator></NavigationContainer></QueryClientProvider>;
 }
 
 const styles = StyleSheet.create({
@@ -98,6 +104,8 @@ const styles = StyleSheet.create({
   actionTitle: { color: '#263B54', fontSize: 17, fontWeight: '800' },
   actionText: { color: '#68716E', fontSize: 13, marginTop: 5 },
   planHint: { color: '#1E6F63', fontSize: 12, fontWeight: '700', marginTop: 10 },
+  networkStatus: { color: '#77817E', fontSize: 11, marginTop: 10 },
+  emptyText: { color: '#68716E', fontSize: 14, paddingVertical: 20, textAlign: 'center' },
   arrow: { color: '#1E6F63', fontSize: 30, fontWeight: '300' },
   infoCard: { backgroundColor: '#263B54', borderRadius: 18, gap: 7, padding: 19 },
   infoKicker: { color: '#B8DACA', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },

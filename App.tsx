@@ -71,7 +71,7 @@ function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) 
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#1E6F63', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Cobertura' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Cobertura' }} /></Tabs.Navigator>;
 }
 
 export default function App() {
@@ -79,12 +79,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#F6F3EE' },
+  safeArea: { flex: 1, backgroundColor: '#F7FAF8' },
   homeContent: { flex: 1, gap: 18, padding: 22 },
   listContent: { gap: 12, padding: 22, paddingBottom: 36 },
   detailContent: { gap: 18, padding: 22 },
-  eyebrow: { color: '#1E6F63', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
-  title: { color: '#263B54', fontSize: 28, fontWeight: '800', marginTop: 7 },
+  eyebrow: { color: '#008F5A', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
+  title: { color: '#075E43', fontSize: 28, fontWeight: '800', marginTop: 7 },
   brandRow: { alignItems: 'center', flexDirection: 'row', gap: 8, marginBottom: 8 },
   brandMark: { alignItems: 'center', backgroundColor: '#009B63', borderRadius: 16, height: 32, justifyContent: 'center', width: 32 },
   brandMarkText: { color: '#FFFFFF', fontSize: 21, fontWeight: '800' },
@@ -94,24 +94,24 @@ const styles = StyleSheet.create({
   heroKicker: { color: '#D6F5E8', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
   heroTitle: { color: '#FFFFFF', fontSize: 24, fontWeight: '800', lineHeight: 29 },
   heroText: { color: '#E3FFF2', fontSize: 14, lineHeight: 20 },
-  sectionTitle: { color: '#263B54', fontSize: 21, fontWeight: '800' },
+  sectionTitle: { color: '#075E43', fontSize: 21, fontWeight: '800' },
   actionCard: { alignItems: 'center', backgroundColor: '#FFFFFF', borderColor: '#DDE8E2', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 18 },
-  actionTitle: { color: '#263B54', fontSize: 17, fontWeight: '800' },
+  actionTitle: { color: '#075E43', fontSize: 17, fontWeight: '800' },
   actionText: { color: '#68716E', fontSize: 13, marginTop: 5 },
-  arrow: { color: '#1E6F63', fontSize: 30, fontWeight: '300' },
+  arrow: { color: '#008F5A', fontSize: 30, fontWeight: '300' },
   benefits: { gap: 10 },
   benefitRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   benefitPill: { backgroundColor: '#FFF2B8', borderRadius: 18, color: '#35564B', fontSize: 12, fontWeight: '700', paddingHorizontal: 12, paddingVertical: 9 },
-  infoCard: { backgroundColor: '#263B54', borderRadius: 18, gap: 7, padding: 19 },
-  infoKicker: { color: '#B8DACA', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  infoCard: { backgroundColor: '#075E43', borderRadius: 18, gap: 7, padding: 19 },
+  infoKicker: { color: '#BDEBD3', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
   infoTitle: { color: '#FFF9F2', fontSize: 21, fontWeight: '800' },
-  infoText: { color: '#D6E1DD', fontSize: 13, lineHeight: 19 },
-  searchInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#263B54', fontSize: 14, marginTop: 18, padding: 14 },
+  infoText: { color: '#D8F0E3', fontSize: 13, lineHeight: 19 },
+  searchInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#075E43', fontSize: 14, marginTop: 18, padding: 14 },
   coverageCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 16 },
   coverageCopy: { flex: 1, gap: 4 },
-  coverageCategory: { color: '#D86A3B', fontSize: 10, fontWeight: '800', letterSpacing: 1 },
-  coverageName: { color: '#263B54', fontSize: 17, fontWeight: '800' },
+  coverageCategory: { color: '#F2C94C', fontSize: 10, fontWeight: '800', letterSpacing: 1 },
+  coverageName: { color: '#075E43', fontSize: 17, fontWeight: '800' },
   coverageDetail: { color: '#68716E', fontSize: 12, lineHeight: 17 },
-  detailTitle: { color: '#263B54', fontSize: 32, fontWeight: '800' },
+  detailTitle: { color: '#075E43', fontSize: 32, fontWeight: '800' },
   detailText: { color: '#68716E', fontSize: 17, lineHeight: 26 },
 });

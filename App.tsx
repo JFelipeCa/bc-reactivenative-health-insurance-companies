@@ -13,16 +13,16 @@ type RootStackParamList = { MainTabs: undefined; CoverageDetail: { coverage: Cov
 type TabParamList = { Home: undefined; Coverages: undefined };
 
 const coverages: Coverage[] = [
-  { id: '1', name: 'General medicine', category: 'Consultation', detail: 'In-person and virtual appointments for your health.' },
-  { id: '2', name: 'Family medicine', category: 'Consultation', detail: 'Care for everyone in your household.' },
-  { id: '3', name: 'Pediatrics', category: 'Specialty', detail: 'Specialized care for children and teenagers.' },
-  { id: '4', name: 'Emergency care', category: 'Immediate care', detail: 'A provider network available around the clock.' },
-  { id: '5', name: 'Telemedicine', category: 'Digital', detail: 'Talk to a healthcare professional from home.' },
-  { id: '6', name: 'Dental care', category: 'Wellness', detail: 'Preventive and restorative dental services.' },
-  { id: '7', name: 'Mental health', category: 'Wellness', detail: 'Counseling and emotional support.' },
-  { id: '8', name: 'Laboratory services', category: 'Diagnostics', detail: 'Tests with preferred provider rates.' },
-  { id: '9', name: 'Maternity care', category: 'Specialty', detail: 'Support before and after delivery.' },
-  { id: '10', name: 'Annual checkup', category: 'Prevention', detail: 'A complete health review every year.' },
+  { id: '1', name: 'Medicina general', category: 'Consulta', detail: 'Citas presenciales y virtuales para cuidar tu salud.' },
+  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Atención para todas las personas de tu hogar.' },
+  { id: '3', name: 'Pediatría', category: 'Especialidad', detail: 'Atención especializada para niños y adolescentes.' },
+  { id: '4', name: 'Urgencias', category: 'Atención inmediata', detail: 'Red de atención disponible las 24 horas.' },
+  { id: '5', name: 'Telemedicine', category: 'Digital', detail: 'Habla con un profesional de salud desde casa.' },
+  { id: '6', name: 'Odontología', category: 'Bienestar', detail: 'Servicios dentales preventivos y restaurativos.' },
+  { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Orientación y apoyo emocional.' },
+  { id: '8', name: 'Servicios de laboratorio', category: 'Diagnóstico', detail: 'Exámenes con tarifas preferenciales.' },
+  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompañamiento antes y después del parto.' },
+  { id: '10', name: 'Chequeo anual', category: 'Prevención', detail: 'Una revisión completa de salud cada año.' },
 ];
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -34,19 +34,19 @@ function HomeScreen({ navigation }: { navigation: any }) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.homeContent}>
-        <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+        <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
         <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
         <View style={styles.hero}>
           <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
           <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
           <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
         </View>
-        <Text style={styles.sectionTitle}>Quick access</Text>
+        <Text style={styles.sectionTitle}>Accesos rápidos</Text>
         <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
-          <View><Text style={styles.actionTitle}>Explore coverage</Text><Text style={styles.actionText}>Browse services by category.</Text></View>
+          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categoría.</Text></View>
           <Text style={styles.arrow}>â€º</Text>
         </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Balanced protection for your everyday health needs.</Text></View>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Protección equilibrada para tus necesidades de salud.</Text></View>
       </View>
     </SafeAreaView>
   );
@@ -64,9 +64,9 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>YOUR BENEFITS</Text><Text style={styles.title}>Coverage</Text><Text style={styles.planHint}>Active plan: {selectedPlan} Â· {favoriteCoverages.length} favorites</Text><TextInput value={query} onChangeText={setQuery} placeholder="Search coverage..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Updating coverage...' : 'Data synchronized'}</Text></View>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>TUS BENEFICIOS</Text><Text style={styles.title}>Coverage</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} Â· {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando coberturas...' : 'Datos sincronizados'}</Text></View>}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#008F5A" />}
-        ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Loading coverage...' : isError ? 'Coverage could not be loaded. Pull to retry.' : 'No coverage found.'}</Text>}
+        ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Cargando coberturas...' : isError ? 'No se pudieron cargar las coberturas. Desliza para reintentar.' : 'No se encontraron coberturas.'}</Text>}
         renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>â€º</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
@@ -77,11 +77,11 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
 function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) {
   const { coverage } = route.params;
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
-  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN: {selectedPlan.toUpperCase()}</Text><Text style={styles.infoTitle}>Included in your plan</Text><Text style={styles.infoText}>Review eligibility, provider network, and benefits with your insurance representative.</Text></View></View></SafeAreaView>;
+  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO: {selectedPlan.toUpperCase()}</Text><Text style={styles.infoTitle}>Incluido en tu plan</Text><Text style={styles.infoText}>Consulta la elegibilidad, la red de proveedores y los beneficios con un asesor.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Coverage' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Coberturas' }} /></Tabs.Navigator>;
 }
 
 export default function App() {

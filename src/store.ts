@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 type HealthStore = {
   selectedPlan: string;
@@ -7,7 +9,7 @@ type HealthStore = {
   toggleFavorite: (coverageId: string) => void;
 };
 
-export const useHealthStore = create<HealthStore>((set) => ({
+export const useHealthStore = create<HealthStore>()(persist((set) => ({
   selectedPlan: 'Familiar',
   favoriteCoverages: [],
   selectPlan: (selectedPlan) => set({ selectedPlan }),
@@ -17,4 +19,7 @@ export const useHealthStore = create<HealthStore>((set) => ({
         ? state.favoriteCoverages.filter((id) => id !== coverageId)
         : [...state.favoriteCoverages, coverageId],
     })),
+}), {
+  name: 'health-insurance-preferences',
+  storage: createJSONStorage(() => AsyncStorage),
 }));

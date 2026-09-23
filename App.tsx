@@ -4,12 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { FlatList, Pressable, RefreshControl, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, KeyboardAvoidingView, Pressable, RefreshControl, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { fetchCoverages } from './src/api';
 import { useHealthStore } from './src/store';
 
 type Coverage = { id: string; name: string; category: string; detail: string };
-type RootStackParamList = { MainTabs: undefined; CoverageDetail: { coverage: Coverage } };
+type RootStackParamList = { MainTabs: undefined; CoverageDetail: { coverage: Coverage }; Enrollment: undefined };
 type TabParamList = { Home: undefined; Coverages: undefined };
 
 const coverages: Coverage[] = [
@@ -46,9 +46,46 @@ function HomeScreen({ navigation }: { navigation: any }) {
           <View><Text style={styles.actionTitle}>Explore coverage</Text><Text style={styles.actionText}>Browse services by category.</Text></View>
           <Text style={styles.arrow}>›</Text>
         </Pressable>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Enrollment')}>
+          <View><Text style={styles.actionTitle}>Request enrollment</Text><Text style={styles.actionText}>Submit your member information.</Text></View>
+          <Text style={styles.arrow}>›</Text>
+        </Pressable>
         <View style={styles.infoCard}><Text style={styles.infoKicker}>ACTIVE PLAN</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Balanced protection for your everyday health needs.</Text></View>
       </View>
     </SafeAreaView>
+  );
+}
+
+function EnrollmentScreen() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [memberId, setMemberId] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
+
+  const submit = () => {
+    const nextErrors: string[] = [];
+    if (name.trim().length < 2) nextErrors.push('Enter your full name.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.push('Enter a valid email address.');
+    if (!/^HI-\d{6}$/.test(memberId.trim())) nextErrors.push('Use a member ID such as HI-123456.');
+    setErrors(nextErrors);
+    setSubmitted(nextErrors.length === 0);
+  };
+
+  return (
+    <KeyboardAvoidingView style={styles.safeArea} behavior="padding">
+      <View style={styles.formContent}>
+        <Text style={styles.eyebrow}>MEMBER ENROLLMENT</Text>
+        <Text style={styles.title}>Request coverage</Text>
+        <Text style={styles.detailText}>Share your details and a representative will contact you.</Text>
+        <TextInput value={name} onChangeText={setName} placeholder="Full name" placeholderTextColor="#8A918D" style={styles.formInput} />
+        <TextInput value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" placeholder="Email address" placeholderTextColor="#8A918D" style={styles.formInput} />
+        <TextInput value={memberId} onChangeText={setMemberId} autoCapitalize="characters" placeholder="Member ID (HI-123456)" placeholderTextColor="#8A918D" style={styles.formInput} />
+        {errors.map((error) => <Text key={error} style={styles.errorText}>{error}</Text>)}
+        {submitted ? <Text style={styles.successText}>Your enrollment request is ready to review.</Text> : null}
+        <Pressable style={styles.contactButton} onPress={submit}><Text style={styles.contactButtonText}>Submit request</Text></Pressable>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -85,7 +122,7 @@ function MainTabs() {
 }
 
 export default function App() {
-  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Detalle' }} /></Stack.Navigator></NavigationContainer></QueryClientProvider>;
+  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Coverage detail' }} /><Stack.Screen name="Enrollment" component={EnrollmentScreen} options={{ title: 'Enrollment' }} /></Stack.Navigator></NavigationContainer></QueryClientProvider>;
 }
 
 const styles = StyleSheet.create({
@@ -93,6 +130,7 @@ const styles = StyleSheet.create({
   homeContent: { flex: 1, gap: 18, padding: 22 },
   listContent: { gap: 12, padding: 22, paddingBottom: 36 },
   detailContent: { gap: 18, padding: 22 },
+  formContent: { flex: 1, gap: 14, padding: 22 },
   eyebrow: { color: '#1E6F63', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
   title: { color: '#263B54', fontSize: 28, fontWeight: '800', marginTop: 7 },
   hero: { backgroundColor: '#DDEDE5', borderRadius: 22, gap: 12, padding: 22, marginTop: 10 },
@@ -112,6 +150,11 @@ const styles = StyleSheet.create({
   infoTitle: { color: '#FFF9F2', fontSize: 21, fontWeight: '800' },
   infoText: { color: '#D6E1DD', fontSize: 13, lineHeight: 19 },
   searchInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#263B54', fontSize: 14, marginTop: 18, padding: 14 },
+  formInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#263B54', fontSize: 15, padding: 14 },
+  errorText: { color: '#B54232', fontSize: 12 },
+  successText: { color: '#1E6F63', fontSize: 13, fontWeight: '700' },
+  contactButton: { alignSelf: 'flex-start', backgroundColor: '#D86A3B', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
+  contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
   coverageCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 16 },
   coverageCopy: { flex: 1, gap: 4 },
   coverageCategory: { color: '#D86A3B', fontSize: 10, fontWeight: '800', letterSpacing: 1 },

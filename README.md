@@ -1,24 +1,23 @@
-# Vitalia Salud
+# Health Insurance Coverage App
 
-Aplicacion móvil de una empresa de seguros de salud, desarrollada progresivamente a partir del bootcamp de React Native.
+Generic React Native learning app for the health insurance company domain. Users can browse plans and search covered health services without representing a specific insurer.
 
-## Progreso
+## Week 2: Lists, Inputs, and Styling
 
-- Semana 1: Core Components y Flexbox (`semana-1`)
-- Semana 2: Listas, inputs y estilos
-- Semana 3: Navegacion
-- Semana 4: Estado global con Zustand
-- Semana 5: Networking con TanStack Query
-- Semana 6: Formularios y validacion
-- Semana 7: Persistencia local
-- Semana 8: Autenticacion
-- Semana 9: Animaciones basicas
+### Goals
 
-Cada semana se desarrolla en una rama independiente y se detiene para revision antes de continuar.
+- [x] Render coverage items with `FlatList`.
+- [x] Search coverage in real time with `TextInput`.
+- [x] Provide ten health coverage items.
+- [x] Add pull-to-refresh behavior.
+- [x] Apply reusable styles and conditional selected-plan styling.
 
-## Ejecutar
+Week 2 is complete on the `week-2` branch and ready for review.
+
+## Run with pnpm
 
 ```bash
-npm install
-npx expo start
+pnpm install
+pnpm start
+pnpm typecheck
 ```

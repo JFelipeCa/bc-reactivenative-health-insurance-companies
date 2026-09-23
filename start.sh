@@ -16,10 +16,8 @@ if ! command -v pnpm >/dev/null 2>&1; then
   exit 1
 fi
 
-if [ ! -d node_modules ]; then
-  echo "Installing dependencies with pnpm..."
-  pnpm install
-fi
+echo "Installing dependencies with pnpm..."
+pnpm install --frozen-lockfile
 
 if [ -f "$PID_FILE" ]; then
   existing_pid="$(cat "$PID_FILE")"

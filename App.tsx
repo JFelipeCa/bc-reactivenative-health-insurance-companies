@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { FlatList, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useHealthStore } from './src/store';
 
 type Coverage = { id: string; name: string; category: string; detail: string };
@@ -26,30 +26,7 @@ const coverages: Coverage[] = [
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tabs = createBottomTabNavigator<TabParamList>();
 
-function HomeScreen({ navigation }: { navigation: any }) {
-  const selectedPlan = useHealthStore((state) => state.selectedPlan);
-  return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.homeContent}>
-        <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
-        <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
-        <View style={styles.hero}>
-          <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
-          <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
-          <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
-        </View>
-        <Text style={styles.sectionTitle}>Accesos rapidos</Text>
-        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
-          <View><Text style={styles.actionTitle}>Explorar cobertura</Text><Text style={styles.actionText}>Consulta servicios y red IPS.</Text></View>
-          <Text style={styles.arrow}>›</Text>
-        </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Proteccion para tu hogar con copagos y red nacional.</Text></View>
-      </View>
-    </SafeAreaView>
-  );
-}
-
-function CoveragesScreen({ navigation }: { navigation: any }) {
+C:\Users\senafunction CoveragesScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   const favoriteCoverages = useHealthStore((state) => state.favoriteCoverages);
@@ -60,8 +37,8 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>RED DE ATENCION</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar servicio o IPS..." placeholderTextColor="#8A918D" style={styles.searchInput} /></View>}
-        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>RED DE ATENCION</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} Â· {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar servicio o IPS..." placeholderTextColor="#8A918D" style={styles.searchInput} /></View>}
+        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>â€º</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
@@ -84,7 +61,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: '#F7FAF8' },
-  homeContent: { flex: 1, gap: 18, padding: 22 },
+  homeContent: { flexGrow: 1, gap: 18, padding: 22 },
   listContent: { gap: 12, padding: 22, paddingBottom: 36 },
   detailContent: { gap: 18, padding: 22 },
   eyebrow: { color: '#008F5A', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Vitalia Salud",
-    "slug": "vitalia-salud",
+    "name": "Health Coverage Colombia",
+    "slug": "health-coverage-colombia",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
-    "scheme": "vitaliasalud",
+    "scheme": "healthcoveragecolombia",
     "ios": {
       "supportsTablet": true
     },

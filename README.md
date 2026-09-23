@@ -1,6 +1,6 @@
-# Health Insurance Coverage App
+# Health Coverage Colombia
 
-Generic React Native learning app for the health insurance company domain. It helps members navigate plans, covered services, and benefit details without representing a specific insurer.
+Generic React Native learning app for the health insurance company domain in Colombia. It models plans, copayments, EPS/IPS networks, and benefit details without representing a specific insurer.
 
 ## Week 3: Navigation
 
@@ -20,7 +20,7 @@ pnpm install
 pnpm start
 pnpm typecheck
 ```
-# Vitalia Salud
+## Health Coverage Colombia
 
 Aplicacion móvil de una empresa de seguros de salud, desarrollada progresivamente a partir del bootcamp de React Native.
 

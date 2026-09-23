@@ -20,7 +20,7 @@ pnpm install
 pnpm start
 pnpm typecheck
 ```
-# Vitalia Salud
+## Health Coverage Colombia
 
 Aplicacion móvil de una empresa de seguros de salud, desarrollada progresivamente a partir del bootcamp de React Native.
 

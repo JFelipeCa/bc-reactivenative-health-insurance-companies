@@ -38,15 +38,15 @@ const plans: Plan[] = [
 
 const coverages: Coverage[] = [
   { id: '1', name: 'Consulta general', category: 'Consulta', detail: 'Citas presenciales y virtuales en tu red de atencion.', icon: '+' },
-  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Acompanamiento para todos los miembros del hogar.', icon: '⌂' },
-  { id: '3', name: 'Pediatria', category: 'Especialidad', detail: 'Atencion especializada para ninos y adolescentes.', icon: '♡' },
+  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Acompanamiento para todos los miembros del hogar.', icon: 'âŒ‚' },
+  { id: '3', name: 'Pediatria', category: 'Especialidad', detail: 'Atencion especializada para ninos y adolescentes.', icon: 'â™¡' },
   { id: '4', name: 'Urgencias', category: 'Atencion inmediata', detail: 'Red IPS disponible las 24 horas.', icon: '+' },
   { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Consulta desde casa con profesionales de tu red.', icon: 'o' },
-  { id: '6', name: 'Odontologia', category: 'Bienestar', detail: 'Prevencion y tratamientos con copago informado.', icon: '◇' },
+  { id: '6', name: 'Odontologia', category: 'Bienestar', detail: 'Prevencion y tratamientos con copago informado.', icon: 'â—‡' },
   { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Psicologia y acompanamiento emocional.', icon: 'o' },
   { id: '8', name: 'Laboratorio clinico', category: 'Diagnostico', detail: 'Examenes en IPS autorizadas.', icon: '#' },
-  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompanamiento antes y despues del parto.', icon: '♡' },
-  { id: '10', name: 'Chequeo anual', category: 'Prevencion', detail: 'Revision completa con tu red de atencion.', icon: '✓' },
+  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompanamiento antes y despues del parto.', icon: 'â™¡' },
+  { id: '10', name: 'Chequeo anual', category: 'Prevencion', detail: 'Revision completa con tu red de atencion.', icon: 'âœ“' },
 ];
 
 export default function App() {
@@ -108,7 +108,7 @@ export default function App() {
                       <View style={styles.planTopline}><Text style={styles.planName}>{plan.name}</Text>{isSelected ? <Text style={styles.selectedLabel}>SELECCIONADO</Text> : null}</View>
                       <Text style={styles.planPrice}>{plan.price}</Text>
                       <Text style={styles.planDescription}>{plan.description}</Text>
-                      <View style={styles.benefitRow}>{plan.benefits.map((benefit) => <Text key={benefit} style={styles.benefit}>{`• ${benefit}`}</Text>)}</View>
+                      <View style={styles.benefitRow}>{plan.benefits.map((benefit) => <Text key={benefit} style={styles.benefit}>{`â€¢ ${benefit}`}</Text>)}</View>
                     </View>
                   </Pressable>
                 );
@@ -126,7 +126,7 @@ export default function App() {
           <View style={styles.coverageCard}>
             <View style={styles.coverageIcon}><Text style={styles.coverageIconText}>{item.icon}</Text></View>
             <View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View>
-            <Text style={styles.coverageArrow}>›</Text>
+            <Text style={styles.coverageArrow}>â€º</Text>
           </View>
         )}
         ListFooterComponent={

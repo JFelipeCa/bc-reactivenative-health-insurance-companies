@@ -29,7 +29,30 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tabs = createBottomTabNavigator<TabParamList>();
 const queryClient = new QueryClient();
 
-C:\Users\senafunction CoveragesScreen({ navigation }: { navigation: any }) {
+function HomeScreen({ navigation }: { navigation: any }) {
+  const selectedPlan = useHealthStore((state) => state.selectedPlan);
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.homeContent} showsVerticalScrollIndicator={false}>
+        <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
+        <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
+        <View style={styles.hero}>
+          <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+          <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
+          <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
+        </View>
+        <Text style={styles.sectionTitle}>Accesos rápidos</Text>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
+          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categoría.</Text></View>
+          <Text style={styles.arrow}>â€º</Text>
+        </Pressable>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Protección equilibrada para tus necesidades de salud.</Text></View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+function CoveragesScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   const favoriteCoverages = useHealthStore((state) => state.favoriteCoverages);

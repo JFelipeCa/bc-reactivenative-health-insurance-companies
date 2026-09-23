@@ -2,6 +2,7 @@
   "name": "health-insurance-coverage-app",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@11.20.0",
   "main": "expo/AppEntry.js",
   "scripts": {
     "start": "expo start",

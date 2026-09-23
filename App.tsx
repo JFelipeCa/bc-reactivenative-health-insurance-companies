@@ -31,9 +31,9 @@ type Coverage = {
 };
 
 const plans: Plan[] = [
-  { id: 'individual', name: 'Individual', price: '$89.900 COP / mes', accent: '#1E6F63', description: 'Cobertura base para tus necesidades de salud en Colombia.', benefits: ['Consulta general', 'Red de urgencias', 'Telemedicina 24/7'] },
-  { id: 'familiar', name: 'Familiar', price: '$159.900 COP / mes', accent: '#D86A3B', description: 'Proteccion para tu hogar con acceso a una red nacional.', benefits: ['Consulta general', 'Pediatria incluida', 'Atencion odontologica'] },
-  { id: 'preferente', name: 'Preferente', price: '$249.900 COP / mes', accent: '#263B54', description: 'Acceso preferente a especialistas y servicios complementarios.', benefits: ['Habitacion individual', 'Especialistas', 'Chequeo anual'] },
+  { id: 'individual', name: 'Individual', price: '$89.900 COP / mes', accent: '#008F5A', description: 'Cobertura base para tus necesidades de salud en Colombia.', benefits: ['Consulta general', 'Red de urgencias', 'Telemedicina 24/7'] },
+  { id: 'familiar', name: 'Familiar', price: '$159.900 COP / mes', accent: '#F2C94C', description: 'Proteccion para tu hogar con acceso a una red nacional.', benefits: ['Consulta general', 'Pediatria incluida', 'Atencion odontologica'] },
+  { id: 'preferente', name: 'Preferente', price: '$249.900 COP / mes', accent: '#075E43', description: 'Acceso preferente a especialistas y servicios complementarios.', benefits: ['Habitacion individual', 'Especialistas', 'Chequeo anual'] },
 ];
 
 const coverages: Coverage[] = [
@@ -72,7 +72,7 @@ export default function App() {
         data={filteredCoverages}
         keyExtractor={(item) => item.id}
         keyboardShouldPersistTaps="handled"
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshCoverages} tintColor="#1E6F63" />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshCoverages} tintColor="#008F5A" />}
         ListHeaderComponent={
           <View style={styles.headerContent}>
             <View style={styles.header}>
@@ -142,51 +142,51 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#F6F3EE' },
+  safeArea: { flex: 1, backgroundColor: '#F7FAF8' },
   content: { padding: 22, paddingBottom: 36, gap: 12 },
   headerContent: { gap: 24 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  eyebrow: { color: '#1E6F63', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
-  title: { color: '#263B54', fontSize: 25, fontWeight: '800', marginTop: 7, maxWidth: 280 },
-  headerMark: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#D86A3B', alignItems: 'center', justifyContent: 'center' },
+  eyebrow: { color: '#008F5A', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
+  title: { color: '#075E43', fontSize: 25, fontWeight: '800', marginTop: 7, maxWidth: 280 },
+  headerMark: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#F2C94C', alignItems: 'center', justifyContent: 'center' },
   headerMarkText: { color: '#FFF9F2', fontSize: 27, fontWeight: '300' },
-  hero: { backgroundColor: '#DDEDE5', borderRadius: 22, overflow: 'hidden', minHeight: 220, flexDirection: 'row' },
+  hero: { backgroundColor: '#DFF3E8', borderRadius: 22, overflow: 'hidden', minHeight: 220, flexDirection: 'row' },
   heroCopy: { flex: 1, padding: 20, justifyContent: 'center' },
-  heroKicker: { color: '#1E6F63', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
-  heroTitle: { color: '#263B54', fontSize: 23, lineHeight: 28, fontWeight: '800', marginTop: 10 },
+  heroKicker: { color: '#008F5A', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  heroTitle: { color: '#075E43', fontSize: 23, lineHeight: 28, fontWeight: '800', marginTop: 10 },
   heroText: { color: '#4E625E', fontSize: 13, lineHeight: 19, marginTop: 10 },
   heroImage: { width: 116, height: '100%', minHeight: 220 },
   sectionHeading: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
   coverageHeading: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 2 },
-  sectionEyebrow: { color: '#D86A3B', fontSize: 10, fontWeight: '800', letterSpacing: 1.1 },
-  sectionTitle: { color: '#263B54', fontSize: 24, fontWeight: '800', marginTop: 4 },
+  sectionEyebrow: { color: '#F2C94C', fontSize: 10, fontWeight: '800', letterSpacing: 1.1 },
+  sectionTitle: { color: '#075E43', fontSize: 24, fontWeight: '800', marginTop: 4 },
   counter: { color: '#77817E', fontSize: 12, paddingBottom: 3 },
   planList: { gap: 12 },
   planCard: { flexDirection: 'row', backgroundColor: '#FFFCF8', borderRadius: 16, overflow: 'hidden', borderWidth: 1, borderColor: '#E9E4DC' },
-  planCardSelected: { borderColor: '#1E6F63', borderWidth: 2 },
+  planCardSelected: { borderColor: '#008F5A', borderWidth: 2 },
   planAccent: { width: 7 },
   planBody: { flex: 1, padding: 15 },
   planTopline: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  planName: { color: '#263B54', fontSize: 19, fontWeight: '800' },
-  selectedLabel: { color: '#1E6F63', fontSize: 9, fontWeight: '800' },
-  planPrice: { color: '#D86A3B', fontSize: 14, fontWeight: '800', marginTop: 4 },
+  planName: { color: '#075E43', fontSize: 19, fontWeight: '800' },
+  selectedLabel: { color: '#008F5A', fontSize: 9, fontWeight: '800' },
+  planPrice: { color: '#F2C94C', fontSize: 14, fontWeight: '800', marginTop: 4 },
   planDescription: { color: '#68716E', fontSize: 12, lineHeight: 17, marginTop: 7 },
   benefitRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 11 },
   benefit: { color: '#4E625E', fontSize: 11 },
-  searchInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#263B54', fontSize: 14, paddingHorizontal: 15, paddingVertical: 13 },
+  searchInput: { backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 12, borderWidth: 1, color: '#075E43', fontSize: 14, paddingHorizontal: 15, paddingVertical: 13 },
   coverageCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', marginBottom: 10, padding: 14 },
   coverageIcon: { alignItems: 'center', backgroundColor: '#EAF7F3', borderRadius: 12, height: 44, justifyContent: 'center', width: 44 },
-  coverageIconText: { color: '#1E6F63', fontSize: 22 },
+  coverageIconText: { color: '#008F5A', fontSize: 22 },
   coverageCopy: { flex: 1, marginLeft: 12 },
-  coverageCategory: { color: '#D86A3B', fontSize: 9, fontWeight: '800', letterSpacing: 1, textTransform: 'uppercase' },
-  coverageName: { color: '#263B54', fontSize: 16, fontWeight: '800', marginTop: 3 },
+  coverageCategory: { color: '#F2C94C', fontSize: 9, fontWeight: '800', letterSpacing: 1, textTransform: 'uppercase' },
+  coverageName: { color: '#075E43', fontSize: 16, fontWeight: '800', marginTop: 3 },
   coverageDetail: { color: '#68716E', fontSize: 12, marginTop: 3 },
-  coverageArrow: { color: '#1E6F63', fontSize: 28, fontWeight: '300', marginLeft: 8 },
+  coverageArrow: { color: '#008F5A', fontSize: 28, fontWeight: '300', marginLeft: 8 },
   emptyText: { color: '#68716E', fontSize: 14, paddingVertical: 20, textAlign: 'center' },
-  summary: { backgroundColor: '#263B54', borderRadius: 18, gap: 16, marginTop: 14, padding: 18 },
-  summaryEyebrow: { color: '#B8DACA', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  summary: { backgroundColor: '#075E43', borderRadius: 18, gap: 16, marginTop: 14, padding: 18 },
+  summaryEyebrow: { color: '#BDEBD3', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
   summaryTitle: { color: '#FFF9F2', fontSize: 22, fontWeight: '800', marginTop: 5 },
-  summaryText: { color: '#D6E1DD', fontSize: 12, lineHeight: 18, marginTop: 5 },
-  contactButton: { alignSelf: 'flex-start', backgroundColor: '#D86A3B', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
+  summaryText: { color: '#D8F0E3', fontSize: 12, lineHeight: 18, marginTop: 5 },
+  contactButton: { alignSelf: 'flex-start', backgroundColor: '#F2C94C', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
 });

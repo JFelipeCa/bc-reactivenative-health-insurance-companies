@@ -77,7 +77,7 @@ export default function App() {
           <View style={styles.headerContent}>
             <View style={styles.header}>
               <View>
-                <Text style={styles.eyebrow}>HEALTH COVERAGE COLOMBIA</Text>
+                <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
                 <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
               </View>
               <View style={styles.headerMark}><Text style={styles.headerMarkText}>+</Text></View>

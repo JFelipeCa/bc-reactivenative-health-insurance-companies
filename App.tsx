@@ -13,16 +13,16 @@ type RootStackParamList = { MainTabs: undefined; CoverageDetail: { coverage: Cov
 type TabParamList = { Home: undefined; Coverages: undefined };
 
 const coverages: Coverage[] = [
-  { id: '1', name: 'Medicina general', category: 'Consulta', detail: 'Citas presenciales y virtuales para cuidar tu salud.' },
-  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Acompanamiento para todas las personas de tu hogar.' },
-  { id: '3', name: 'Pediatria', category: 'Especialidad', detail: 'Cuidado especializado para ninos y adolescentes.' },
-  { id: '4', name: 'Urgencias', category: 'Atencion inmediata', detail: 'Red disponible las 24 horas, todos los dias.' },
-  { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Habla con un profesional sin salir de casa.' },
-  { id: '6', name: 'Odontologia', category: 'Bienestar', detail: 'Prevencion y tratamientos dentales.' },
-  { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Psicologia y acompanamiento emocional.' },
-  { id: '8', name: 'Laboratorio', category: 'Diagnostico', detail: 'Examenes con tarifas preferenciales.' },
-  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompanamiento antes y despues del parto.' },
-  { id: '10', name: 'Chequeo anual', category: 'Prevencion', detail: 'Una revision completa cada ano.' },
+  { id: '1', name: 'General medicine', category: 'Consultation', detail: 'In-person and virtual appointments for your health.' },
+  { id: '2', name: 'Family medicine', category: 'Consultation', detail: 'Care for everyone in your household.' },
+  { id: '3', name: 'Pediatrics', category: 'Specialty', detail: 'Specialized care for children and teenagers.' },
+  { id: '4', name: 'Emergency care', category: 'Immediate care', detail: 'A provider network available around the clock.' },
+  { id: '5', name: 'Telemedicine', category: 'Digital', detail: 'Talk to a healthcare professional from home.' },
+  { id: '6', name: 'Dental care', category: 'Wellness', detail: 'Preventive and restorative dental services.' },
+  { id: '7', name: 'Mental health', category: 'Wellness', detail: 'Counseling and emotional support.' },
+  { id: '8', name: 'Laboratory services', category: 'Diagnostics', detail: 'Tests with preferred provider rates.' },
+  { id: '9', name: 'Maternity care', category: 'Specialty', detail: 'Support before and after delivery.' },
+  { id: '10', name: 'Annual checkup', category: 'Prevention', detail: 'A complete health review every year.' },
 ];
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -81,7 +81,7 @@ function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) 
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#1E6F63', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Coberturas' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#1E6F63', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Coverage' }} /></Tabs.Navigator>;
 }
 
 export default function App() {

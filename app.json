@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Vitalia Salud",
-    "slug": "vitalia-salud",
+    "name": "Health Insurance Coverage",
+    "slug": "health-insurance-coverage",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
-    "scheme": "vitaliasalud",
+    "scheme": "healthinsurancecoverage",
     "ios": {
       "supportsTablet": true
     },

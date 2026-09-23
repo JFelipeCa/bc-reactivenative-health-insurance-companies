@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Health Insurance Coverage",
-    "slug": "health-insurance-coverage",
+    "name": "Health Coverage Colombia",
+    "slug": "health-coverage-colombia",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
-    "scheme": "healthinsurancecoverage",
+    "scheme": "healthcoveragecolombia",
     "ios": {
       "supportsTablet": true
     },

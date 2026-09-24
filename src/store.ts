@@ -29,4 +29,3 @@ export const useHealthStore = create<HealthStore>()(persist((set) => ({
   name: 'health-insurance-preferences',
   storage: createJSONStorage(() => AsyncStorage),
 }));
-

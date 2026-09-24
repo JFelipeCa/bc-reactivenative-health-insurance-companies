@@ -34,8 +34,8 @@ const plans: Plan[] = [
     name: 'Familiar',
     price: '$159.900 COP / mes',
     accent: '#F2C94C',
-    description: 'Proteccion para tu hogar con acceso a una red nacional.',
-    benefits: ['Consulta general', 'Pediatria incluida', 'Atencion odontologica'],
+    description: 'protección para tu hogar con acceso a una red nacional.',
+    benefits: ['Consulta general', 'pediatría incluida', 'atención odontologica'],
   },
   {
     id: 'premium',
@@ -110,7 +110,7 @@ export default function HomeScreen() {
                   <View style={styles.benefitRow}>
                     {plan.benefits.map((benefit) => (
                       <Text key={benefit} style={styles.benefit}>
-                        {`Ã¢â‚¬Â¢ ${benefit}`}
+                        {`• ${benefit}`}
                       </Text>
                     ))}
                   </View>
@@ -172,3 +172,4 @@ const styles = StyleSheet.create({
   contactButton: { alignSelf: 'flex-start', backgroundColor: '#F2C94C', borderRadius: 10, paddingVertical: 12, paddingHorizontal: 15 },
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
 });
+

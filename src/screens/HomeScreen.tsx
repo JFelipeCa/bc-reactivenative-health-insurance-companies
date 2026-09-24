@@ -1,4 +1,4 @@
-﻿import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
   Image,
@@ -57,7 +57,7 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <View>
-            <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
+            <Text style={styles.eyebrow}>{String.fromCodePoint(0x1F3E5)}  COBERTURA DE SALUD COLOMBIA</Text>
             <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
           </View>
           <View style={styles.headerMark}>
@@ -67,7 +67,7 @@ export default function HomeScreen() {
 
         <View style={styles.hero}>
           <View style={styles.heroCopy}>
-            <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+            <Text style={styles.heroKicker}>{String.fromCodePoint(0x1F49A)}  SISTEMA DE SALUD COLOMBIANO</Text>
             <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
             <Text style={styles.heroText}>
               Consulta opciones de cobertura y redes EPS e IPS.
@@ -83,7 +83,7 @@ export default function HomeScreen() {
         <View style={styles.sectionHeading}>
           <View>
             <Text style={styles.sectionEyebrow}>OPCIONES DE COBERTURA</Text>
-            <Text style={styles.sectionTitle}>Planes de salud</Text>
+            <Text style={styles.sectionTitle}>{String.fromCodePoint(0x2728)}  Planes de salud</Text>
           </View>
           <Text style={styles.counter}>03 opciones</Text>
         </View>

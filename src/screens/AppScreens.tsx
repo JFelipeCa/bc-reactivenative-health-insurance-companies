@@ -5,24 +5,24 @@ import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-quer
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { FlatList, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { fetchCoverages } from '../api/coverages';
+import { fetchCoberturass } from '../api/coverages';
 import { useHealthStore } from '../store';
 
-type Coverage = { id: string; name: string; category: string; detail: string };
-type RootStackParamList = { MainTabs: undefined; CoverageDetail: { coverage: Coverage } };
-type TabParamList = { Home: undefined; Coverages: undefined };
+type Coberturas = { id: string; name: string; category: string; detail: string };
+type RootStackParamList = { MainTabs: undefined; CoberturasDetail: { coverage: Coberturas } };
+type TabParamList = { Home: undefined; Coberturass: undefined };
 
-const coverages: Coverage[] = [
+const coverages: Coberturas[] = [
   { id: '1', name: 'Medicina general', category: 'Consulta', detail: 'Citas presenciales y virtuales para cuidar tu salud.' },
-  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'AtenciÃ³n para todas las personas de tu hogar.' },
-  { id: '3', name: 'PediatrÃ­a', category: 'Especialidad', detail: 'AtenciÃ³n especializada para niÃ±os y adolescentes.' },
-  { id: '4', name: 'Urgencias', category: 'AtenciÃ³n inmediata', detail: 'Red de atenciÃ³n disponible las 24 horas.' },
-  { id: '5', name: 'Telemedicine', category: 'Digital', detail: 'Habla con un profesional de salud desde casa.' },
-  { id: '6', name: 'OdontologÃ­a', category: 'Bienestar', detail: 'Servicios dentales preventivos y restaurativos.' },
-  { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'OrientaciÃ³n y apoyo emocional.' },
-  { id: '8', name: 'Servicios de laboratorio', category: 'DiagnÃ³stico', detail: 'ExÃ¡menes con tarifas preferenciales.' },
-  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'AcompaÃ±amiento antes y despuÃ©s del parto.' },
-  { id: '10', name: 'Chequeo anual', category: 'PrevenciÃ³n', detail: 'Una revisiÃ³n completa de salud cada aÃ±o.' },
+  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Atención para todas las personas de tu hogar.' },
+  { id: '3', name: 'Pediatría', category: 'Especialidad', detail: 'Atención especializada para niños y adolescentes.' },
+  { id: '4', name: 'Urgencias', category: 'Atención inmediata', detail: 'Red de atención disponible las 24 horas.' },
+  { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Habla con un profesional de salud desde casa.' },
+  { id: '6', name: 'Odontología', category: 'Bienestar', detail: 'Servicios dentales preventivos y restaurativos.' },
+  { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Orientación y apoyo emocional.' },
+  { id: '8', name: 'Servicios de laboratorio', category: 'Diagnóstico', detail: 'Exámenes con tarifas preferenciales.' },
+  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompañamiento antes y después del parto.' },
+  { id: '10', name: 'Chequeo anual', category: 'Prevención', detail: 'Una revisión completa de salud cada año.' },
 ];
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -41,22 +41,22 @@ function HomeScreen({ navigation }: { navigation: any }) {
           <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
           <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
         </View>
-        <Text style={styles.sectionTitle}>Accesos rÃ¡pidos</Text>
-        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
-          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categorÃ­a.</Text></View>
-          <Text style={styles.arrow}>Ã¢â‚¬Âº</Text>
+        <Text style={styles.sectionTitle}>Accesos rápidos</Text>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coberturass')}>
+          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categoría.</Text></View>
+          <Text style={styles.arrow}>›</Text>
         </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>ProtecciÃ³n equilibrada para tus necesidades de salud.</Text></View>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Protección equilibrada para tus necesidades de salud.</Text></View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-function CoveragesScreen({ navigation }: { navigation: any }) {
+function CoberturassScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
-  const favoriteCoverages = useHealthStore((state) => state.favoriteCoverages);
-  const { data = [], isError, isFetching, isLoading, refetch } = useQuery({ queryKey: ['coverages'], queryFn: fetchCoverages });
+  const favoriteCoberturass = useHealthStore((state) => state.favoriteCoberturass);
+  const { data = [], isError, isFetching, isLoading, refetch } = useQuery({ queryKey: ['coverages'], queryFn: fetchCoberturass });
   const filtered = data.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -64,28 +64,28 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>TUS BENEFICIOS</Text><Text style={styles.title}>Coverage</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} Ã‚Â· {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando coberturas...' : 'Datos sincronizados'}</Text></View>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>TUS BENEFICIOS</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoberturass.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando coberturas...' : 'Datos sincronizados'}</Text></View>}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#008F5A" />}
         ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Cargando coberturas...' : isError ? 'No se pudieron cargar las coberturas. Desliza para reintentar.' : 'No se encontraron coberturas.'}</Text>}
-        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>Ã¢â‚¬Âº</Text></Pressable>}
+        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoberturasDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );
 }
 
-function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) {
+function DetailScreen({ route }: { route: { params: { coverage: Coberturas } } }) {
   const { coverage } = route.params;
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO: {selectedPlan.toUpperCase()}</Text><Text style={styles.infoTitle}>Incluido en tu plan</Text><Text style={styles.infoText}>Consulta la elegibilidad, la red de proveedores y los beneficios con un asesor.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Coberturas' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coberturass" component={CoberturassScreen} options={{ title: 'Coberturas' }} /></Tabs.Navigator>;
 }
 
 export default function App() {
-  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Detalle' }} /></Stack.Navigator></NavigationContainer></QueryClientProvider>;
+  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoberturasDetail" component={DetailScreen} options={{ title: 'Detalle' }} /></Stack.Navigator></NavigationContainer></QueryClientProvider>;
 }
 
 const styles = StyleSheet.create({
@@ -120,4 +120,5 @@ const styles = StyleSheet.create({
   detailTitle: { color: '#075E43', fontSize: 32, fontWeight: '800' },
   detailText: { color: '#68716E', fontSize: 17, lineHeight: 26 },
 });
+
 

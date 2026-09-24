@@ -8,7 +8,7 @@ Aplicación educativa con Expo y React Native para explorar planes y coberturas 
 - Expo Go para probar las pantallas con caché en memoria.
 - Un development build de iOS o Android para persistir la caché con MMKV.
 
-## Instalación y ejecución
+## Instalaci�n y ejecuci�n
 
 ```bash
 pnpm install --frozen-lockfile

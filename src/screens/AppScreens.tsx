@@ -64,7 +64,7 @@ function HomeScreen({ navigation }: { navigation: any }) {
   );
 }
 
-function coveragesScreen({ navigation }: { navigation: any }) {
+function CoveragesScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const filtered = coverages.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
   return (
@@ -87,7 +87,7 @@ function DetailScreen({ route }: { route: { params: { coverage: Coberturas } } }
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="coverages" component={coveragesScreen} options={{ title: 'Cobertura' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="coverages" component={CoveragesScreen} options={{ title: 'Cobertura' }} /></Tabs.Navigator>;
 }
 
 export default function App() {

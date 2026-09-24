@@ -26,5 +26,3 @@ export async function fetchCoberturass(): Promise<RemoteCoberturas[]> {
     detail: `Servicio disponible en la red EPS e IPS.`,
   }));
 }
-
-

@@ -115,6 +115,3 @@ const styles = StyleSheet.create({
   detailTitle: { color: '#075E43', fontSize: 32, fontWeight: '800' },
   detailText: { color: '#68716E', fontSize: 17, lineHeight: 26 },
 });
-
-
-

@@ -33,7 +33,7 @@ export async function fetchCoverages(): Promise<RemoteCoverage[]> {
   if (!response.ok) throw new Error('No se pudieron cargar las coberturas.');
   const payload: unknown = await response.json();
   if (!Array.isArray(payload) || !payload.every(isCoverage)) {
-    throw new Error('La API devolviÃ³ un catÃ¡logo de coberturas invÃ¡lido.');
+    throw new Error('La API devolvi\u00f3 un cat\u00e1logo de coberturas inv\u00e1lido.');
   }
   return payload;
 }

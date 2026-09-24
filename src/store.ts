@@ -4,7 +4,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 type HealthStore = {
   selectedPlan: string;
-  favoriteCoberturass: string[];
+  favoritecoverages: string[];
   isAuthenticated: boolean;
   selectPlan: (plan: string) => void;
   toggleFavorite: (coverageId: string) => void;
@@ -14,14 +14,14 @@ type HealthStore = {
 
 export const useHealthStore = create<HealthStore>()(persist((set) => ({
   selectedPlan: 'Familiar',
-  favoriteCoberturass: [],
+  favoritecoverages: [],
   isAuthenticated: false,
   selectPlan: (selectedPlan) => set({ selectedPlan }),
   toggleFavorite: (coverageId) =>
     set((state) => ({
-      favoriteCoberturass: state.favoriteCoberturass.includes(coverageId)
-        ? state.favoriteCoberturass.filter((id) => id !== coverageId)
-        : [...state.favoriteCoberturass, coverageId],
+      favoritecoverages: state.favoritecoverages.includes(coverageId)
+        ? state.favoritecoverages.filter((id) => id !== coverageId)
+        : [...state.favoritecoverages, coverageId],
     })),
   signIn: () => set({ isAuthenticated: true }),
   signOut: () => set({ isAuthenticated: false }),

@@ -5,12 +5,12 @@ import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-quer
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { FlatList, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { fetchCoberturass } from '../api/coverages';
+import { fetchcoverages } from '../api/coverages';
 import { useHealthStore } from '../store';
 
 type Coberturas = { id: string; name: string; category: string; detail: string };
 type RootStackParamList = { MainTabs: undefined; CoberturasDetail: { coverage: Coberturas } };
-type TabParamList = { Home: undefined; Coberturass: undefined };
+type TabParamList = { Home: undefined; coverages: undefined };
 
 const coverages: Coberturas[] = [
   { id: '1', name: 'Medicina general', category: 'Consulta', detail: 'Citas presenciales y virtuales para cuidar tu salud.' },
@@ -42,7 +42,7 @@ function HomeScreen({ navigation }: { navigation: any }) {
           <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
         </View>
         <Text style={styles.sectionTitle}>Accesos rápidos</Text>
-        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coberturass')}>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('coverages')}>
           <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categoría.</Text></View>
           <Text style={styles.arrow}>›</Text>
         </Pressable>
@@ -52,11 +52,11 @@ function HomeScreen({ navigation }: { navigation: any }) {
   );
 }
 
-function CoberturassScreen({ navigation }: { navigation: any }) {
+function coveragesScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
-  const favoriteCoberturass = useHealthStore((state) => state.favoriteCoberturass);
-  const { data = [], isError, isFetching, isLoading, refetch } = useQuery({ queryKey: ['coverages'], queryFn: fetchCoberturass });
+  const favoritecoverages = useHealthStore((state) => state.favoritecoverages);
+  const { data = [], isError, isFetching, isLoading, refetch } = useQuery({ queryKey: ['coverages'], queryFn: fetchcoverages });
   const filtered = data.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -64,7 +64,7 @@ function CoberturassScreen({ navigation }: { navigation: any }) {
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>TUS BENEFICIOS</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoberturass.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando coberturas...' : 'Datos sincronizados'}</Text></View>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>TUS BENEFICIOS</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoritecoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar cobertura..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando coberturas...' : 'Datos sincronizados'}</Text></View>}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#008F5A" />}
         ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Cargando coberturas...' : isError ? 'No se pudieron cargar las coberturas. Desliza para reintentar.' : 'No se encontraron coberturas.'}</Text>}
         renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoberturasDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
@@ -81,7 +81,7 @@ function DetailScreen({ route }: { route: { params: { coverage: Coberturas } } }
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coberturass" component={CoberturassScreen} options={{ title: 'Coberturas' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="coverages" component={coveragesScreen} options={{ title: 'Coberturas' }} /></Tabs.Navigator>;
 }
 
 export default function App() {

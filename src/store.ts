@@ -2,19 +2,19 @@
 
 type HealthStore = {
   selectedPlan: string;
-  favoriteCoberturass: string[];
+  favoritecoverages: string[];
   selectPlan: (plan: string) => void;
   toggleFavorite: (coverageId: string) => void;
 };
 
 export const useHealthStore = create<HealthStore>((set) => ({
   selectedPlan: 'Familiar',
-  favoriteCoberturass: [],
+  favoritecoverages: [],
   selectPlan: (selectedPlan) => set({ selectedPlan }),
   toggleFavorite: (coverageId) =>
     set((state) => ({
-      favoriteCoberturass: state.favoriteCoberturass.includes(coverageId)
-        ? state.favoriteCoberturass.filter((id) => id !== coverageId)
-        : [...state.favoriteCoberturass, coverageId],
+      favoritecoverages: state.favoritecoverages.includes(coverageId)
+        ? state.favoritecoverages.filter((id) => id !== coverageId)
+        : [...state.favoritecoverages, coverageId],
     })),
 }));

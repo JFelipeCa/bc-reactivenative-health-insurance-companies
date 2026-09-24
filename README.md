@@ -1,35 +1,19 @@
-# Health Coverage Colombia
+﻿# Health Coverage Colombia
 
-A React Native learning project for the health insurance company domain in Colombia. It models plans in COP, copayments, EPS/IPS networks, local preferences, and covered services without representing a specific insurer.
+Educational Expo and React Native project for the health coverage domain in Colombia. Sample plans and copayments are illustrative and do not represent a specific insurer.
 
-## Week 7 Progress
+## Week 7: Local Persistence
 
-### Goals
+This branch demonstrates local preference persistence. Do not store credentials or real member data in the demo store.
 
-- [x] Persist the active plan with Zustand persist.
-- [x] Persist favorite coverage identifiers locally.
-- [x] Use AsyncStorage as the persistence adapter.
-- [x] Restore member preferences after the app restarts.
+## Source layout
 
-### Completed
+Application code lives under src/: screens, navigation, API, components, state, theme, hooks, and domain types are grouped by responsibility. Some folders are scaffolds for later weekly lessons.
 
-Week 7 is complete on the `week-7` branch. The implementation is ready for review before continuing to Week 8.
+## Run
 
-## Weekly roadmap
-
-- Week 1: Core components and Flexbox
-- Week 2: Lists, inputs, and styling
-- Week 3: Navigation
-- Week 4: Global state with Zustand
-- Week 5: Networking with TanStack Query
-- Week 6: Forms and validation
-- Week 7: Local persistence
-- Week 8: Authentication
-- Week 9: Basic animations
-
-## Run with pnpm
-
-```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm start
-```
+pnpm typecheck
+
+See [the weekly criteria](docs/ENTREGAS_SEMANALES.md) and [the source layout](docs/ESTRUCTURA.md).

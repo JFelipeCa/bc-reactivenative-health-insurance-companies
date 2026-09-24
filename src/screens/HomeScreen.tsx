@@ -22,7 +22,7 @@ type Plan = {
   benefits: string[];
 };
 
-type Coverage = {
+type Coberturas = {
   id: string;
   name: string;
   category: string;
@@ -32,21 +32,21 @@ type Coverage = {
 
 const plans: Plan[] = [
   { id: 'individual', name: 'Individual', price: '$89.900 COP / mes', accent: '#008F5A', description: 'Cobertura base para tus necesidades de salud en Colombia.', benefits: ['Consulta general', 'Red de urgencias', 'Telemedicina 24/7'] },
-  { id: 'familiar', name: 'Familiar', price: '$159.900 COP / mes', accent: '#F2C94C', description: 'Proteccion para tu hogar con acceso a una red nacional.', benefits: ['Consulta general', 'Pediatria incluida', 'Atencion odontologica'] },
+  { id: 'familiar', name: 'Familiar', price: '$159.900 COP / mes', accent: '#F2C94C', description: 'protección para tu hogar con acceso a una red nacional.', benefits: ['Consulta general', 'pediatría incluida', 'atención odontologica'] },
   { id: 'preferente', name: 'Preferente', price: '$249.900 COP / mes', accent: '#075E43', description: 'Acceso preferente a especialistas y servicios complementarios.', benefits: ['Habitacion individual', 'Especialistas', 'Chequeo anual'] },
 ];
 
-const coverages: Coverage[] = [
+const coverages: Coberturas[] = [
   { id: '1', name: 'Consulta general', category: 'Consulta', detail: 'Citas presenciales y virtuales en tu red de atencion.', icon: '+' },
-  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Acompanamiento para todos los miembros del hogar.', icon: 'Ã¢Å’â€š' },
-  { id: '3', name: 'Pediatria', category: 'Especialidad', detail: 'Atencion especializada para ninos y adolescentes.', icon: 'Ã¢â„¢Â¡' },
-  { id: '4', name: 'Urgencias', category: 'Atencion inmediata', detail: 'Red IPS disponible las 24 horas.', icon: '+' },
+  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'acompañamiento para todos los miembros del hogar.', icon: 'Ã¢Å’â€š' },
+  { id: '3', name: 'pediatría', category: 'Especialidad', detail: 'atención especializada para niños y adolescentes.', icon: 'Ã¢â„¢Â¡' },
+  { id: '4', name: 'Urgencias', category: 'atención inmediata', detail: 'Red IPS disponible las 24 horas.', icon: '+' },
   { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Consulta desde casa con profesionales de tu red.', icon: 'o' },
-  { id: '6', name: 'Odontologia', category: 'Bienestar', detail: 'Prevencion y tratamientos con copago informado.', icon: 'Ã¢â€”â€¡' },
+  { id: '6', name: 'odontología', category: 'Bienestar', detail: 'prevención y tratamientos con copago informado.', icon: 'Ã¢â€”â€¡' },
   { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Psicologia y acompanamiento emocional.', icon: 'o' },
   { id: '8', name: 'Laboratorio clinico', category: 'Diagnostico', detail: 'Examenes en IPS autorizadas.', icon: '#' },
-  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompanamiento antes y despues del parto.', icon: 'Ã¢â„¢Â¡' },
-  { id: '10', name: 'Chequeo anual', category: 'Prevencion', detail: 'Revision completa con tu red de atencion.', icon: 'Ã¢Å“â€œ' },
+  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'acompañamiento antes y despues del parto.', icon: 'Ã¢â„¢Â¡' },
+  { id: '10', name: 'Chequeo anual', category: 'prevención', detail: 'revisión completa con tu red de atencion.', icon: 'Ã¢Å“â€œ' },
 ];
 
 export default function HomeScreen() {
@@ -55,11 +55,11 @@ export default function HomeScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const activePlan = plans.find((plan) => plan.id === selectedPlan) ?? plans[1];
   const normalizedQuery = query.trim().toLowerCase();
-  const filteredCoverages = coverages.filter((coverage) =>
+  const filteredCoberturass = coverages.filter((coverage) =>
     `${coverage.name} ${coverage.category} ${coverage.detail}`.toLowerCase().includes(normalizedQuery),
   );
 
-  const refreshCoverages = () => {
+  const refreshCoberturass = () => {
     setRefreshing(true);
     setTimeout(() => setRefreshing(false), 600);
   };
@@ -69,10 +69,10 @@ export default function HomeScreen() {
       <StatusBar style="dark" />
       <FlatList
         contentContainerStyle={styles.content}
-        data={filteredCoverages}
+        data={filteredCoberturass}
         keyExtractor={(item) => item.id}
         keyboardShouldPersistTaps="handled"
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshCoverages} tintColor="#008F5A" />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshCoberturass} tintColor="#008F5A" />}
         ListHeaderComponent={
           <View style={styles.headerContent}>
             <View style={styles.header}>
@@ -108,7 +108,7 @@ export default function HomeScreen() {
                       <View style={styles.planTopline}><Text style={styles.planName}>{plan.name}</Text>{isSelected ? <Text style={styles.selectedLabel}>SELECCIONADO</Text> : null}</View>
                       <Text style={styles.planPrice}>{plan.price}</Text>
                       <Text style={styles.planDescription}>{plan.description}</Text>
-                      <View style={styles.benefitRow}>{plan.benefits.map((benefit) => <Text key={benefit} style={styles.benefit}>{`Ã¢â‚¬Â¢ ${benefit}`}</Text>)}</View>
+                      <View style={styles.benefitRow}>{plan.benefits.map((benefit) => <Text key={benefit} style={styles.benefit}>{`• ${benefit}`}</Text>)}</View>
                     </View>
                   </Pressable>
                 );
@@ -116,7 +116,7 @@ export default function HomeScreen() {
             </View>
             <View style={styles.coverageHeading}>
               <View><Text style={styles.sectionEyebrow}>RED DE ATENCION</Text><Text style={styles.sectionTitle}>Servicios incluidos</Text></View>
-              <Text style={styles.counter}>{filteredCoverages.length} resultados</Text>
+              <Text style={styles.counter}>{filteredCoberturass.length} resultados</Text>
             </View>
             <TextInput accessibilityLabel="Buscar cobertura" onChangeText={setQuery} placeholder="Busca medicina, urgencias..." placeholderTextColor="#8A918D" style={styles.searchInput} value={query} />
           </View>
@@ -126,7 +126,7 @@ export default function HomeScreen() {
           <View style={styles.coverageCard}>
             <View style={styles.coverageIcon}><Text style={styles.coverageIconText}>{item.icon}</Text></View>
             <View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View>
-            <Text style={styles.coverageArrow}>Ã¢â‚¬Âº</Text>
+            <Text style={styles.coverageArrow}>›</Text>
           </View>
         )}
         ListFooterComponent={
@@ -190,4 +190,5 @@ const styles = StyleSheet.create({
   contactButton: { alignSelf: 'flex-start', backgroundColor: '#F2C94C', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
 });
+
 

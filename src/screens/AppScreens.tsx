@@ -5,24 +5,24 @@ import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-quer
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { FlatList, KeyboardAvoidingView, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { fetchCoverages } from '../api/coverages';
+import { fetchCoberturass } from '../api/coverages';
 import { useHealthStore } from '../store';
 
-type Coverage = { id: string; name: string; category: string; detail: string };
-type RootStackParamList = { Auth: undefined; MainTabs: undefined; CoverageDetail: { coverage: Coverage }; Enrollment: undefined };
-type TabParamList = { Home: undefined; Coverages: undefined };
+type Coberturas = { id: string; name: string; category: string; detail: string };
+type RootStackParamList = { Auth: undefined; MainTabs: undefined; CoberturasDetail: { coverage: Coberturas }; Enrollment: undefined };
+type TabParamList = { Home: undefined; Coberturass: undefined };
 
-const coverages: Coverage[] = [
+const coverages: Coberturas[] = [
   { id: '1', name: 'Medicina general', category: 'Consulta', detail: 'Citas presenciales y virtuales para cuidar tu salud.' },
-  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'AtenciÃ³n para todas las personas de tu hogar.' },
-  { id: '3', name: 'PediatrÃ­a', category: 'Especialidad', detail: 'AtenciÃ³n especializada para niÃ±os y adolescentes.' },
-  { id: '4', name: 'Urgencias', category: 'AtenciÃ³n inmediata', detail: 'Red de atenciÃ³n disponible las 24 horas.' },
-  { id: '5', name: 'Telemedicine', category: 'Digital', detail: 'Habla con un profesional de salud desde casa.' },
-  { id: '6', name: 'OdontologÃ­a', category: 'Bienestar', detail: 'Servicios dentales preventivos y restaurativos.' },
-  { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'OrientaciÃ³n y apoyo emocional.' },
-  { id: '8', name: 'Servicios de laboratorio', category: 'DiagnÃ³stico', detail: 'ExÃ¡menes con tarifas preferenciales.' },
-  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'AcompaÃ±amiento antes y despuÃ©s del parto.' },
-  { id: '10', name: 'Chequeo anual', category: 'PrevenciÃ³n', detail: 'Una revisiÃ³n completa de salud cada aÃ±o.' },
+  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Atención para todas las personas de tu hogar.' },
+  { id: '3', name: 'Pediatría', category: 'Especialidad', detail: 'Atención especializada para niños y adolescentes.' },
+  { id: '4', name: 'Urgencias', category: 'Atención inmediata', detail: 'Red de atención disponible las 24 horas.' },
+  { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Habla con un profesional de salud desde casa.' },
+  { id: '6', name: 'Odontología', category: 'Bienestar', detail: 'Servicios dentales preventivos y restaurativos.' },
+  { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Orientación y apoyo emocional.' },
+  { id: '8', name: 'Servicios de laboratorio', category: 'Diagnóstico', detail: 'Exámenes con tarifas preferenciales.' },
+  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompañamiento antes y después del parto.' },
+  { id: '10', name: 'Chequeo anual', category: 'Prevención', detail: 'Una revisión completa de salud cada año.' },
 ];
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -42,17 +42,17 @@ function HomeScreen({ navigation }: { navigation: any }) {
           <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
           <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
         </View>
-        <Text style={styles.sectionTitle}>Accesos rÃ¡pidos</Text>
-        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
-          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categorÃ­a.</Text></View>
-          <Text style={styles.arrow}>Ã¢â‚¬Âº</Text>
+        <Text style={styles.sectionTitle}>Accesos rápidos</Text>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coberturass')}>
+          <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categoría.</Text></View>
+          <Text style={styles.arrow}>›</Text>
         </Pressable>
         <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Enrollment')}>
-          <View><Text style={styles.actionTitle}>Solicitar afiliaciÃ³n</Text><Text style={styles.actionText}>EnvÃ­a tus datos de afiliaciÃ³n.</Text></View>
-          <Text style={styles.arrow}>Ã¢â‚¬Âº</Text>
+          <View><Text style={styles.actionTitle}>Solicitar afiliación</Text><Text style={styles.actionText}>Envía tus datos de afiliación.</Text></View>
+          <Text style={styles.arrow}>›</Text>
         </Pressable>
-        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>ProtecciÃ³n equilibrada para tus necesidades de salud. Tu preferencia se guarda en el dispositivo.</Text></View>
-        <Pressable onPress={signOut}><Text style={styles.signOutText}>Cerrar sesiÃ³n</Text></Pressable>
+        <View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO</Text><Text style={styles.infoTitle}>{selectedPlan}</Text><Text style={styles.infoText}>Protección equilibrada para tus necesidades de salud. Tu preferencia se guarda en el dispositivo.</Text></View>
+        <Pressable onPress={signOut}><Text style={styles.signOutText}>Cerrar sesión</Text></Pressable>
       </ScrollView>
     </SafeAreaView>
   );
@@ -66,14 +66,14 @@ function AuthScreen() {
 
   const submit = () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 8) {
-      setError('Ingresa un correo vÃ¡lido y una contraseÃ±a de al menos 8 caracteres.');
+      setError('Ingresa un correo válido y una contraseña de al menos 8 caracteres.');
       return;
     }
     setError('');
     signIn();
   };
 
-  return <SafeAreaView style={styles.safeArea}><View style={styles.formContent}><Text style={styles.eyebrow}>ACCESO DE AFILIADOS</Text><Text style={styles.title}>Ingresa a tu cobertura</Text><TextInput value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" placeholder="Correo electrÃ³nico" placeholderTextColor="#8A918D" style={styles.formInput} /><TextInput value={password} onChangeText={setPassword} secureTextEntry placeholder="ContraseÃ±a" placeholderTextColor="#8A918D" style={styles.formInput} />{error ? <Text style={styles.errorText}>{error}</Text> : null}<Pressable style={styles.contactButton} onPress={submit}><Text style={styles.contactButtonText}>Iniciar sesiÃ³n</Text></Pressable></View></SafeAreaView>;
+  return <SafeAreaView style={styles.safeArea}><View style={styles.formContent}><Text style={styles.eyebrow}>ACCESO DE AFILIADOS</Text><Text style={styles.title}>Ingresa a tu cobertura</Text><TextInput value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" placeholder="Correo electrónico" placeholderTextColor="#8A918D" style={styles.formInput} /><TextInput value={password} onChangeText={setPassword} secureTextEntry placeholder="Contraseña" placeholderTextColor="#8A918D" style={styles.formInput} />{error ? <Text style={styles.errorText}>{error}</Text> : null}<Pressable style={styles.contactButton} onPress={submit}><Text style={styles.contactButtonText}>Iniciar sesión</Text></Pressable></View></SafeAreaView>;
 }
 
 function EnrollmentScreen() {
@@ -86,8 +86,8 @@ function EnrollmentScreen() {
   const submit = () => {
     const nextErrors: string[] = [];
     if (name.trim().length < 2) nextErrors.push('Ingresa tu nombre completo.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.push('Ingresa un correo electrÃ³nico vÃ¡lido.');
-    if (!/^HI-\d{6}$/.test(memberId.trim())) nextErrors.push('Usa un nÃºmero de afiliado como HI-123456.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.push('Ingresa un correo electrónico válido.');
+    if (!/^HI-\d{6}$/.test(memberId.trim())) nextErrors.push('Usa un número de afiliado como HI-123456.');
     setErrors(nextErrors);
     setSubmitted(nextErrors.length === 0);
   };
@@ -95,25 +95,25 @@ function EnrollmentScreen() {
   return (
     <KeyboardAvoidingView style={styles.safeArea} behavior="padding">
       <View style={styles.formContent}>
-        <Text style={styles.eyebrow}>SOLICITUD DE AFILIACIÃ“N</Text>
+        <Text style={styles.eyebrow}>SOLICITUD DE AFILIACIÓN</Text>
         <Text style={styles.title}>Solicitar cobertura</Text>
-        <Text style={styles.detailText}>Comparte tus datos y un asesor se pondrÃ¡ en contacto contigo.</Text>
+        <Text style={styles.detailText}>Comparte tus datos y un asesor se pondrá en contacto contigo.</Text>
         <TextInput value={name} onChangeText={setName} placeholder="Nombre completo" placeholderTextColor="#8A918D" style={styles.formInput} />
-        <TextInput value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" placeholder="Correo electrÃ³nico" placeholderTextColor="#8A918D" style={styles.formInput} />
-        <TextInput value={memberId} onChangeText={setMemberId} autoCapitalize="characters" placeholder="NÃºmero de afiliado (HI-123456)" placeholderTextColor="#8A918D" style={styles.formInput} />
+        <TextInput value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" placeholder="Correo electrónico" placeholderTextColor="#8A918D" style={styles.formInput} />
+        <TextInput value={memberId} onChangeText={setMemberId} autoCapitalize="characters" placeholder="Número de afiliado (HI-123456)" placeholderTextColor="#8A918D" style={styles.formInput} />
         {errors.map((error) => <Text key={error} style={styles.errorText}>{error}</Text>)}
-        {submitted ? <Text style={styles.successText}>Tu solicitud de afiliaciÃ³n estÃ¡ lista para revisiÃ³n.</Text> : null}
+        {submitted ? <Text style={styles.successText}>Tu solicitud de afiliación está lista para revisión.</Text> : null}
         <Pressable style={styles.contactButton} onPress={submit}><Text style={styles.contactButtonText}>Enviar solicitud</Text></Pressable>
       </View>
     </KeyboardAvoidingView>
   );
 }
 
-function CoveragesScreen({ navigation }: { navigation: any }) {
+function CoberturassScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
-  const favoriteCoverages = useHealthStore((state) => state.favoriteCoverages);
-  const { data = [], isError, isFetching, isLoading, refetch } = useQuery({ queryKey: ['coverages'], queryFn: fetchCoverages });
+  const favoriteCoberturass = useHealthStore((state) => state.favoriteCoberturass);
+  const { data = [], isError, isFetching, isLoading, refetch } = useQuery({ queryKey: ['coverages'], queryFn: fetchCoberturass });
   const filtered = data.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -121,29 +121,29 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         contentContainerStyle={styles.listContent}
         data={filtered}
         keyExtractor={(item) => item.id}
-        ListHeaderComponent={<View><Text style={styles.eyebrow}>RED DE ATENCION</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} Ã‚Â· {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar servicio o IPS..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando cobertura...' : 'Datos sincronizados'}</Text></View>}
+        ListHeaderComponent={<View><Text style={styles.eyebrow}>RED DE ATENCION</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoberturass.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar servicio o IPS..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando cobertura...' : 'Datos sincronizados'}</Text></View>}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#008F5A" />}
         ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Cargando coberturas...' : isError ? 'No se pudieron cargar las coberturas. Desliza para reintentar.' : 'No se encontraron coberturas.'}</Text>}
-        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>Ã¢â‚¬Âº</Text></Pressable>}
+        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoberturasDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );
 }
 
-function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) {
+function DetailScreen({ route }: { route: { params: { coverage: Coberturas } } }) {
   const { coverage } = route.params;
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>PLAN ACTIVO: {selectedPlan.toUpperCase()}</Text><Text style={styles.infoTitle}>Incluido en tu plan</Text><Text style={styles.infoText}>Consulta la elegibilidad, la red de proveedores y los beneficios con un asesor.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Coberturas' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coberturass" component={CoberturassScreen} options={{ title: 'Coberturas' }} /></Tabs.Navigator>;
 }
 
 export default function App() {
   const isAuthenticated = useHealthStore((state) => state.isAuthenticated);
-  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator>{isAuthenticated ? <><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Detalle de cobertura' }} /><Stack.Screen name="Enrollment" component={EnrollmentScreen} options={{ title: 'AfiliaciÃ³n' }} /></> : <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false }} />}</Stack.Navigator></NavigationContainer></QueryClientProvider>;
+  return <QueryClientProvider client={queryClient}><NavigationContainer><StatusBar style="dark" /><Stack.Navigator>{isAuthenticated ? <><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoberturasDetail" component={DetailScreen} options={{ title: 'Detalle de cobertura' }} /><Stack.Screen name="Enrollment" component={EnrollmentScreen} options={{ title: 'Afiliación' }} /></> : <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false }} />}</Stack.Navigator></NavigationContainer></QueryClientProvider>;
 }
 
 const styles = StyleSheet.create({
@@ -185,4 +185,5 @@ const styles = StyleSheet.create({
   detailTitle: { color: '#075E43', fontSize: 32, fontWeight: '800' },
   detailText: { color: '#68716E', fontSize: 17, lineHeight: 26 },
 });
+
 

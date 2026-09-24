@@ -28,4 +28,9 @@ export const useHealthStore = create<HealthStore>()(persist((set) => ({
 }), {
   name: 'health-insurance-preferences',
   storage: createJSONStorage(() => AsyncStorage),
+  partialize: (state) => ({
+    selectedPlan: state.selectedPlan,
+    favoriteCoverages: state.favoriteCoverages,
+    isAuthenticated: state.isAuthenticated,
+  }),
 }));

@@ -1,4 +1,4 @@
-﻿import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
   FlatList,
@@ -49,6 +49,18 @@ const coverages: Coberturas[] = [
   { id: '10', name: 'Chequeo anual', category: 'prevención', detail: 'revisión completa con tu red de atención.', icon: '✓' },
 ];
 
+function coverageEmoji(coverage: Coberturas): string {
+  const name = `${coverage.name} ${coverage.category}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  if (name.includes('urgencia')) return String.fromCodePoint(0x1F691);
+  if (name.includes('telemedicina')) return String.fromCodePoint(0x1F4F1);
+  if (name.includes('odontologia')) return String.fromCodePoint(0x1F9B7);
+  if (name.includes('mental') || name.includes('psicologia')) return String.fromCodePoint(0x1F9E0);
+  if (name.includes('laboratorio')) return String.fromCodePoint(0x1F9EA);
+  if (name.includes('maternidad')) return String.fromCodePoint(0x1F930);
+  if (name.includes('pediatria')) return String.fromCodePoint(0x1F476);
+  if (name.includes('familiar')) return String.fromCodePoint(0x1F46A);
+  return String.fromCodePoint(0x1FA7A);
+}
 export default function HomeScreen() {
   const [selectedPlan, setSelectedPlan] = useState('familiar');
   const [query, setQuery] = useState('');
@@ -77,14 +89,14 @@ export default function HomeScreen() {
           <View style={styles.headerContent}>
             <View style={styles.header}>
               <View>
-                <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
+                <Text style={styles.eyebrow}>{String.fromCodePoint(0x1F3E5)}  COBERTURA DE SALUD COLOMBIA</Text>
                 <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
               </View>
               <View style={styles.headerMark}><Text style={styles.headerMarkText}>+</Text></View>
             </View>
             <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+                <Text style={styles.heroKicker}>{String.fromCodePoint(0x1F49A)}  SISTEMA DE SALUD COLOMBIANO</Text>
                 <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
                 <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
               </View>
@@ -124,7 +136,7 @@ export default function HomeScreen() {
         ListEmptyComponent={<Text style={styles.emptyText}>No encontramos una cobertura con ese nombre.</Text>}
         renderItem={({ item }) => (
           <View style={styles.coverageCard}>
-            <View style={styles.coverageIcon}><Text style={styles.coverageIconText}>{item.icon}</Text></View>
+            <View style={styles.coverageIcon}><Text style={styles.coverageIconText}>{coverageEmoji(item)}</Text></View>
             <View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View>
             <Text style={styles.coverageArrow}>›</Text>
           </View>

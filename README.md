@@ -18,3 +18,4 @@ pnpm typecheck
 
 See [the weekly criteria](docs/ENTREGAS_SEMANALES.md) and [the source layout](docs/ESTRUCTURA.md).
 
+

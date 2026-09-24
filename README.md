@@ -4,7 +4,7 @@ Educational Expo and React Native project for the health coverage domain in Colo
 
 ## Week 5: Networking and TanStack Query
 
-This branch demonstrates typed data access, a query screen, loading/error/empty states, and refresh. The public demo endpoint is not an insurance provider.
+This branch demonstrates a configurable /coverages endpoint, query states, and refresh. Without a backend URL, it uses a curated local health-coverage catalog.
 
 ## Source layout
 
@@ -17,3 +17,4 @@ pnpm start
 pnpm typecheck
 
 See [the weekly criteria](docs/ENTREGAS_SEMANALES.md) and [the source layout](docs/ESTRUCTURA.md).
+

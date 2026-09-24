@@ -37,16 +37,16 @@ const plans: Plan[] = [
 ];
 
 const coverages: Coberturas[] = [
-  { id: '1', name: 'Consulta general', category: 'Consulta', detail: 'Citas presenciales y virtuales en tu red de atencion.', icon: '+' },
-  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'acompañamiento para todos los miembros del hogar.', icon: 'Ã¢Å’â€š' },
-  { id: '3', name: 'pediatría', category: 'Especialidad', detail: 'atención especializada para niños y adolescentes.', icon: 'Ã¢â„¢Â¡' },
+  { id: '1', name: 'Consulta general', category: 'Consulta', detail: 'Citas presenciales y virtuales en tu red de atención.', icon: '+' },
+  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'acompañamiento para todos los miembros del hogar.', icon: '•' },
+  { id: '3', name: 'pediatría', category: 'Especialidad', detail: 'atención especializada para niños y adolescentes.', icon: '♥' },
   { id: '4', name: 'Urgencias', category: 'atención inmediata', detail: 'Red IPS disponible las 24 horas.', icon: '+' },
   { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Consulta desde casa con profesionales de tu red.', icon: 'o' },
-  { id: '6', name: 'odontología', category: 'Bienestar', detail: 'prevención y tratamientos con copago informado.', icon: 'Ã¢â€”â€¡' },
+  { id: '6', name: 'odontología', category: 'Bienestar', detail: 'prevención y tratamientos con copago informado.', icon: '◇' },
   { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Psicologia y acompanamiento emocional.', icon: 'o' },
   { id: '8', name: 'Laboratorio clinico', category: 'Diagnostico', detail: 'Examenes en IPS autorizadas.', icon: '#' },
-  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'acompañamiento antes y despues del parto.', icon: 'Ã¢â„¢Â¡' },
-  { id: '10', name: 'Chequeo anual', category: 'prevención', detail: 'revisión completa con tu red de atencion.', icon: 'Ã¢Å“â€œ' },
+  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'acompañamiento antes y después del parto.', icon: '♥' },
+  { id: '10', name: 'Chequeo anual', category: 'prevención', detail: 'revisión completa con tu red de atención.', icon: '✓' },
 ];
 
 export default function HomeScreen() {
@@ -131,7 +131,7 @@ export default function HomeScreen() {
         )}
         ListFooterComponent={
           <View style={styles.summary}>
-            <View><Text style={styles.summaryEyebrow}>PLAN SELECCIONADO</Text><Text style={styles.summaryTitle}>{activePlan.name}</Text><Text style={styles.summaryText}>Consulta copagos, red IPS y condiciones de atencion para este plan.</Text></View>
+            <View><Text style={styles.summaryEyebrow}>PLAN SELECCIONADO</Text><Text style={styles.summaryTitle}>{activePlan.name}</Text><Text style={styles.summaryText}>Consulta copagos, red IPS y condiciones de atención para este plan.</Text></View>
             <TouchableOpacity accessibilityRole="button" style={styles.contactButton} onPress={() => undefined}><Text style={styles.contactButtonText}>Consultar plan</Text></TouchableOpacity>
           </View>
         }
@@ -190,5 +190,6 @@ const styles = StyleSheet.create({
   contactButton: { alignSelf: 'flex-start', backgroundColor: '#F2C94C', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
 });
+
 
 

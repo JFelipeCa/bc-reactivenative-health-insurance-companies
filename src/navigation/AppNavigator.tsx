@@ -3,6 +3,7 @@ import { ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthScreen } from '../screens/AuthScreen';
+import { readTokens } from '../api/tokenStorage';
 import { CoverageDetailScreen } from '../screens/CoverageDetailScreen';
 import { CoveragesScreen } from '../screens/CoveragesScreen';
 import { EnrollmentScreen } from '../screens/EnrollmentScreen';
@@ -23,6 +24,10 @@ function MainTabs() {
 
 export function AppNavigator() {
   const isAuthenticated = useHealthStore((state) => state.isAuthenticated);
+  const authReady = useHealthStore((state) => state.authReady);
+  const setAuthReady = useHealthStore((state) => state.setAuthReady);
+  const signIn = useHealthStore((state) => state.signIn);
+  const signOut = useHealthStore((state) => state.signOut);
   const [hydrated, setHydrated] = useState(useHealthStore.persist.hasHydrated());
   useEffect(() => {
     const unsubscribe = useHealthStore.persist.onFinishHydration(() => setHydrated(true));
@@ -30,7 +35,23 @@ export function AppNavigator() {
     return unsubscribe;
   }, []);
 
-  if (!hydrated) return <SafeAreaView style={styles.loading}><ActivityIndicator color={colors.primary} /></SafeAreaView>;
+  useEffect(() => {
+    let active = true;
+    void readTokens().then((tokens) => {
+      if (!active) return;
+      if (tokens) signIn();
+      else signOut();
+      setAuthReady(true);
+    }).catch(() => {
+      if (active) {
+        signOut();
+        setAuthReady(true);
+      }
+    });
+    return () => { active = false; };
+  }, [setAuthReady, signIn, signOut]);
+
+  if (!hydrated || !authReady) return <SafeAreaView style={styles.loading}><ActivityIndicator color={colors.primary} /></SafeAreaView>;
   return <Stack.Navigator>
     {isAuthenticated ? <>
       <Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} />

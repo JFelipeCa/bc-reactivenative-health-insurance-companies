@@ -10,7 +10,7 @@ Las ramas `week-1` a `week-9` conservan su progresión. Esta tabla registra lo q
 | `week-4` | Estado global Zustand | Plan y favoritos compartidos, persistidos con AsyncStorage. |
 | `week-5` | Networking y TanStack Query | Axios, `useQuery`, estados de carga/error/vacío y mutación de favoritos con invalidación. Con `EXPO_PUBLIC_API_URL` vacío se usa el catálogo local; el servicio de cobertura real debe proporcionarlo el aprendiz. |
 | `week-6` | Formularios y validación | React Hook Form, `Controller` y Zod validan nombre, correo, teléfono e identificador. Solo se incluye el alta local; el servidor de afiliación y la edición de perfil no están configurados. |
-| `week-7` | Persistencia local | AsyncStorage guarda preferencias; MMKV guarda caché de coberturas; SecureStore guarda tokens. MMKV requiere un development build. |
+| `week-7` | Persistencia local | AsyncStorage guarda preferencias; MMKV guarda caché de coberturas; SecureStore guarda tokens. En Expo Go, la caché cae a memoria; la persistencia MMKV requiere un development build. |
 | `week-8` | Autenticación | Login de prueba, `/auth/me`, interceptor de Axios, renovación con refresh token, logout y OAuth Authorization Code + PKCE. OAuth requiere cliente y URI registrados. |
 | `week-9` | Animaciones | Entrada con timing y spring, rotación interpolada, `LayoutAnimation`, feedback al tocar y progreso animado del formulario. |
 

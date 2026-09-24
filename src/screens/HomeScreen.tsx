@@ -190,6 +190,3 @@ const styles = StyleSheet.create({
   contactButton: { alignSelf: 'flex-start', backgroundColor: '#F2C94C', borderRadius: 10, paddingHorizontal: 15, paddingVertical: 12 },
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
 });
-
-
-

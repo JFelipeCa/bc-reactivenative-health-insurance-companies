@@ -4,9 +4,23 @@ import { colors } from '../theme';
 
 type Props = { item: Coverage; favorite: boolean; onPress: () => void; onToggleFavorite: () => void };
 
+function coverageEmoji(name: string, category: string): string {
+  const value = `${name} ${category}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  if (value.includes('urgencia')) return String.fromCodePoint(0x1F691);
+  if (value.includes('telemedicina')) return String.fromCodePoint(0x1F4F1);
+  if (value.includes('odontologia')) return String.fromCodePoint(0x1F9B7);
+  if (value.includes('mental') || value.includes('psicologia')) return String.fromCodePoint(0x1F9E0);
+  if (value.includes('laboratorio')) return String.fromCodePoint(0x1F9EA);
+  if (value.includes('maternidad')) return String.fromCodePoint(0x1F930);
+  if (value.includes('pediatria')) return String.fromCodePoint(0x1F476);
+  if (value.includes('familiar')) return String.fromCodePoint(0x1F46A);
+  return String.fromCodePoint(0x1FA7A);
+}
+
 export function CoverageCard({ item, favorite, onPress, onToggleFavorite }: Props) {
   return (
     <View style={styles.card}>
+      <View style={styles.icon}><Text style={styles.emoji}>{coverageEmoji(item.name, item.category)}</Text></View>
       <Pressable accessibilityRole="button" style={styles.copy} onPress={onPress}>
         <Text style={styles.category}>{item.category}</Text>
         <Text style={styles.name}>{item.name}</Text>
@@ -21,6 +35,8 @@ export function CoverageCard({ item, favorite, onPress, onToggleFavorite }: Prop
 
 const styles = StyleSheet.create({
   card: { alignItems: 'center', backgroundColor: colors.surface, borderColor: colors.border, borderRadius: 16, borderWidth: 1, flexDirection: 'row', gap: 12, padding: 16 },
+  icon: { alignItems: 'center', backgroundColor: '#E3F4EA', borderRadius: 14, height: 48, justifyContent: 'center', width: 48 },
+  emoji: { fontSize: 25 },
   copy: { flex: 1, gap: 4 },
   category: { color: colors.primary, fontSize: 10, fontWeight: '800', letterSpacing: 1 },
   name: { color: colors.primaryDark, fontSize: 17, fontWeight: '800' },

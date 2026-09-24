@@ -172,4 +172,3 @@ const styles = StyleSheet.create({
   contactButton: { alignSelf: 'flex-start', backgroundColor: '#F2C94C', borderRadius: 10, paddingVertical: 12, paddingHorizontal: 15 },
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
 });
-

@@ -18,4 +18,3 @@ export const useHealthStore = create<HealthStore>((set) => ({
         : [...state.favoriteCoberturass, coverageId],
     })),
 }));
-

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Animated, Easing, LayoutAnimation, Platform, Pressable, ScrollView, StyleSheet, Text, UIManager, View } from 'react-native';
+import { Animated, Easing, ImageBackground, LayoutAnimation, Platform, Pressable, ScrollView, StyleSheet, Text, UIManager, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { ActionCard } from '../components/ActionCard';
@@ -15,6 +15,7 @@ const plans = [
   { name: 'Familiar', price: '$159.900 COP / mes', benefits: 'Opciones de atención para tu hogar.' },
   { name: 'Integral', price: '$219.900 COP / mes', benefits: 'Servicios ampliados de bienestar y prevención.' },
 ];
+const healthcareImage = 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85';
 
 export function HomeScreen() {
   const navigation = useNavigation<Navigation>();
@@ -39,15 +40,19 @@ export function HomeScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-      <Text style={styles.eyebrow}>COBERTURA DE SALUD · COLOMBIA</Text>
+      <Text style={styles.eyebrow}>{String.fromCodePoint(0x1F3E5)}  COBERTURA DE SALUD · COLOMBIA</Text>
       <Text style={styles.title}>Cuida de tu salud y la de tu familia.</Text>
       <Animated.View style={[styles.hero, { opacity: entrance, transform: [{ translateY: slide }, { rotate: entrance.interpolate({ inputRange: [0, 1], outputRange: ['-2deg', '0deg'] }) }] }]}>
-        <Text style={styles.kicker}>ORIENTACIÓN PARA AFILIADOS</Text>
-        <Text style={styles.heroTitle}>Compara planes, copagos y servicios.</Text>
-        <Text style={styles.body}>Explora opciones de cobertura y conoce cómo funciona la red de atención.</Text>
+        <ImageBackground source={{ uri: healthcareImage }} imageStyle={styles.heroImage} style={styles.heroBackground}>
+          <View style={styles.heroOverlay}>
+            <Text style={styles.kicker}>{String.fromCodePoint(0x1F49A)}  ORIENTACIÓN PARA AFILIADOS</Text>
+            <Text style={styles.heroTitle}>Compara planes, copagos y servicios.</Text>
+            <Text style={styles.heroBody}>Explora opciones de cobertura y conoce cómo funciona la red de atención.</Text>
+          </View>
+        </ImageBackground>
       </Animated.View>
 
-      <Text style={styles.sectionTitle}>Elige un plan de referencia</Text>
+      <Text style={styles.sectionTitle}>{String.fromCodePoint(0x2728)}  Elige un plan de referencia</Text>
       {plans.map((plan) => {
         const active = plan.name === selectedPlan;
         return <Pressable key={plan.name} accessibilityRole="button" onPress={() => select(plan.name)} style={({ pressed }) => [styles.plan, active && styles.planActive, pressed && styles.pressed]}>
@@ -71,9 +76,13 @@ const styles = StyleSheet.create({
   content: { flexGrow: 1, gap: 16, padding: 22, backgroundColor: colors.background },
   eyebrow: { color: colors.primary, fontSize: 12, fontWeight: '800', letterSpacing: 1.4 },
   title: { color: colors.primaryDark, fontSize: 28, fontWeight: '800', lineHeight: 34 },
-  hero: { backgroundColor: '#DFF3E8', borderRadius: 22, gap: 10, padding: 22 },
-  kicker: { color: colors.primary, fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
-  heroTitle: { color: colors.primaryDark, fontSize: 23, fontWeight: '800', lineHeight: 28 },
+  hero: { backgroundColor: colors.primaryDark, borderRadius: 22, overflow: 'hidden' },
+  heroBackground: { justifyContent: 'flex-end', minHeight: 245 },
+  heroImage: { borderRadius: 22 },
+  heroOverlay: { backgroundColor: 'rgba(3, 54, 39, 0.70)', gap: 10, padding: 22 },
+  kicker: { color: '#BDEBD3', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  heroTitle: { color: '#FFF9F2', fontSize: 23, fontWeight: '800', lineHeight: 28 },
+  heroBody: { color: '#F0F7F2', fontSize: 13, lineHeight: 19 },
   body: { color: colors.muted, fontSize: 13, lineHeight: 19 },
   sectionTitle: { color: colors.primaryDark, fontSize: 20, fontWeight: '800', marginTop: 5 },
   plan: { backgroundColor: colors.surface, borderColor: colors.border, borderRadius: 15, borderWidth: 1, gap: 6, padding: 16 },

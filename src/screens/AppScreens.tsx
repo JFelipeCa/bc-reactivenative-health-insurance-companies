@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { FlatList, KeyboardAvoidingView, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, KeyboardAvoidingView, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, Image } from 'react-native';
 import { fetchCoverages } from '../api/coverages';
 import { useHealthStore } from '../store';
 
@@ -25,6 +25,20 @@ const coverages: Coberturas[] = [
   { id: '10', name: 'Chequeo anual', category: 'Prevención', detail: 'Una revisión completa de salud cada año.' },
 ];
 
+const healthcareImage = 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80';
+
+function coverageEmoji(coverage: Coberturas): string {
+  const name = `${coverage.name} ${coverage.category}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  if (name.includes('urgencia')) return String.fromCodePoint(0x1F691);
+  if (name.includes('telemedicina')) return String.fromCodePoint(0x1F4F1);
+  if (name.includes('odontologia')) return String.fromCodePoint(0x1F9B7);
+  if (name.includes('mental') || name.includes('psicologia')) return String.fromCodePoint(0x1F9E0);
+  if (name.includes('laboratorio')) return String.fromCodePoint(0x1F9EA);
+  if (name.includes('maternidad')) return String.fromCodePoint(0x1F930);
+  if (name.includes('pediatria')) return String.fromCodePoint(0x1F476);
+  if (name.includes('familiar')) return String.fromCodePoint(0x1F46A);
+  return String.fromCodePoint(0x1FA7A);
+}
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tabs = createBottomTabNavigator<TabParamList>();
 const queryClient = new QueryClient();
@@ -38,11 +52,12 @@ function HomeScreen({ navigation }: { navigation: any }) {
         <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
         <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
         <View style={styles.hero}>
-          <Text style={styles.heroKicker}>SISTEMA DE SALUD COLOMBIANO</Text>
+          <Text style={styles.heroKicker}>{String.fromCodePoint(0x1F49A)}  SISTEMA DE SALUD COLOMBIANO</Text>
           <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
           <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
+          <Image accessibilityLabel="Healthcare consultation" source={{ uri: healthcareImage }} style={styles.heroImage} />
         </View>
-        <Text style={styles.sectionTitle}>Accesos rápidos</Text>
+        <Text style={styles.sectionTitle}>{String.fromCodePoint(0x2728)}  Accesos rápidos</Text>
         <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
           <View><Text style={styles.actionTitle}>Explorar coberturas</Text><Text style={styles.actionText}>Explora los servicios por categoría.</Text></View>
           <Text style={styles.arrow}>›</Text>
@@ -124,7 +139,7 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         ListHeaderComponent={<View><Text style={styles.eyebrow}>RED DE ATENCI</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.planHint}>Plan activo: {selectedPlan} · {favoriteCoverages.length} favoritas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar servicio o IPS..." placeholderTextColor="#8A918D" style={styles.searchInput} /><Text style={styles.networkStatus}>{isFetching ? 'Actualizando cobertura...' : 'Datos sincronizados'}</Text></View>}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor="#008F5A" />}
         ListEmptyComponent={<Text style={styles.emptyText}>{isLoading ? 'Cargando coberturas...' : isError ? 'No se pudieron cargar las coberturas. Desliza para reintentar.' : 'No se encontraron coberturas.'}</Text>}
-        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoberturasDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
+        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoberturasDetail', { coverage: item })}><View style={styles.coverageIcon}><Text style={styles.coverageEmoji}>{coverageEmoji(item)}</Text></View><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
@@ -154,7 +169,8 @@ const styles = StyleSheet.create({
   formContent: { flex: 1, gap: 14, padding: 22 },
   eyebrow: { color: '#008F5A', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
   title: { color: '#075E43', fontSize: 28, fontWeight: '800', marginTop: 7 },
-  hero: { backgroundColor: '#DFF3E8', borderRadius: 22, gap: 12, padding: 22, marginTop: 10 },
+  hero: { backgroundColor: '#DFF3E8', borderRadius: 22, alignItems: 'center', flexDirection: 'row', gap: 12, overflow: 'hidden', padding: 22, marginTop: 10 },
+  heroImage: { borderRadius: 14, height: 120, width: 90 },
   heroKicker: { color: '#008F5A', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
   heroTitle: { color: '#075E43', fontSize: 24, fontWeight: '800', lineHeight: 29 },
   heroText: { color: '#4E625E', fontSize: 14, lineHeight: 20 },
@@ -178,6 +194,8 @@ const styles = StyleSheet.create({
   contactButtonText: { color: '#FFF9F2', fontSize: 13, fontWeight: '800' },
   signOutText: { color: '#008F5A', fontSize: 13, fontWeight: '800', textAlign: 'center' },
   coverageCard: { alignItems: 'center', backgroundColor: '#FFFCF8', borderColor: '#E9E4DC', borderRadius: 16, borderWidth: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 16 },
+  coverageIcon: { alignItems: 'center', backgroundColor: '#E3F4EA', borderRadius: 14, height: 48, justifyContent: 'center', marginRight: 12, width: 48 },
+  coverageEmoji: { fontSize: 25 },
   coverageCopy: { flex: 1, gap: 4 },
   coverageCategory: { color: '#F2C94C', fontSize: 10, fontWeight: '800', letterSpacing: 1 },
   coverageName: { color: '#075E43', fontSize: 17, fontWeight: '800' },

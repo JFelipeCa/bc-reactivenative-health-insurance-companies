@@ -5,21 +5,21 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { FlatList, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
-type Coverage = { id: string; name: string; category: string; detail: string };
-type RootStackParamList = { MainTabs: undefined; CoverageDetail: { coverage: Coverage } };
-type TabParamList = { Home: undefined; Coverages: undefined };
+type Coberturas = { id: string; name: string; category: string; detail: string };
+type RootStackParamList = { MainTabs: undefined; CoberturasDetail: { coverage: Coberturas } };
+type TabParamList = { Home: undefined; Coberturass: undefined };
 
-const coverages: Coverage[] = [
+const coverages: Coberturas[] = [
   { id: '1', name: 'Consulta general', category: 'Consulta', detail: 'Citas presenciales y virtuales en tu red de atencion.' },
-  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'Acompanamiento para todas las personas de tu hogar.' },
-  { id: '3', name: 'Pediatria', category: 'Especialidad', detail: 'Cuidado especializado para ninos y adolescentes.' },
-  { id: '4', name: 'Urgencias', category: 'Atencion inmediata', detail: 'Red disponible las 24 horas, todos los dias.' },
+  { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'acompañamiento para todas las personas de tu hogar.' },
+  { id: '3', name: 'pediatría', category: 'Especialidad', detail: 'Cuidado especializado para niños y adolescentes.' },
+  { id: '4', name: 'Urgencias', category: 'atención inmediata', detail: 'Red disponible las 24 horas, todos los días.' },
   { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Habla con un profesional sin salir de casa.' },
-  { id: '6', name: 'Odontologia', category: 'Bienestar', detail: 'Prevencion y tratamientos dentales.' },
+  { id: '6', name: 'odontología', category: 'Bienestar', detail: 'prevención y tratamientos dentales.' },
   { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Psicologia y acompanamiento emocional.' },
   { id: '8', name: 'Laboratorio', category: 'Diagnostico', detail: 'Examenes con tarifas preferenciales.' },
-  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'Acompanamiento antes y despues del parto.' },
-  { id: '10', name: 'Chequeo anual', category: 'Prevencion', detail: 'Una revision completa cada ano.' },
+  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'acompañamiento antes y despues del parto.' },
+  { id: '10', name: 'Chequeo anual', category: 'prevención', detail: 'Una revision completa cada ano.' },
 ];
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -33,14 +33,14 @@ function HomeScreen({ navigation }: { navigation: any }) {
         <Text style={styles.eyebrow}>SEGUROS DE SALUD</Text>
         <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
         <View style={styles.hero}>
-          <Text style={styles.heroKicker}>COLOMBIA Ã‚Â· EPS + IPS</Text>
+          <Text style={styles.heroKicker}>COLOMBIA · EPS + IPS</Text>
           <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
           <Text style={styles.heroText}>Consulta opciones de cobertura y redes de atencion.</Text>
         </View>
         <Text style={styles.sectionTitle}>Encuentra tu cobertura</Text>
-        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coverages')}>
+        <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coberturass')}>
           <View><Text style={styles.actionTitle}>Explorar cobertura</Text><Text style={styles.actionText}>Consulta servicios y red IPS.</Text></View>
-          <Text style={styles.arrow}>Ã¢â‚¬Âº</Text>
+          <Text style={styles.arrow}>›</Text>
         </Pressable>
         <View style={styles.benefits}><Text style={styles.sectionTitle}>Beneficios esenciales</Text><View style={styles.benefitRow}><Text style={styles.benefitPill}>Ã¢Å“â€œ Medicina general</Text><Text style={styles.benefitPill}>Ã¢Å“â€œ Urgencias 24/7</Text><Text style={styles.benefitPill}>Ã¢Å“â€œ Telemedicina</Text></View></View>
       </ScrollView>
@@ -48,7 +48,7 @@ function HomeScreen({ navigation }: { navigation: any }) {
   );
 }
 
-function CoveragesScreen({ navigation }: { navigation: any }) {
+function CoberturassScreen({ navigation }: { navigation: any }) {
   const [query, setQuery] = useState('');
   const filtered = coverages.filter((item) => `${item.name} ${item.category}`.toLowerCase().includes(query.toLowerCase()));
   return (
@@ -58,24 +58,24 @@ function CoveragesScreen({ navigation }: { navigation: any }) {
         data={filtered}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={<View><Text style={styles.eyebrow}>RED DE ATENCION</Text><Text style={styles.title}>Coberturas</Text><TextInput value={query} onChangeText={setQuery} placeholder="Buscar servicio o IPS..." placeholderTextColor="#8A918D" style={styles.searchInput} /></View>}
-        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>Ã¢â‚¬Âº</Text></Pressable>}
+        renderItem={({ item }) => <Pressable style={styles.coverageCard} onPress={() => navigation.navigate('CoberturasDetail', { coverage: item })}><View style={styles.coverageCopy}><Text style={styles.coverageCategory}>{item.category}</Text><Text style={styles.coverageName}>{item.name}</Text><Text style={styles.coverageDetail}>{item.detail}</Text></View><Text style={styles.arrow}>›</Text></Pressable>}
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );
 }
 
-function DetailScreen({ route }: { route: { params: { coverage: Coverage } } }) {
+function DetailScreen({ route }: { route: { params: { coverage: Coberturas } } }) {
   const { coverage } = route.params;
   return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>COBERTURA DE SALUD COLOMBIA</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Consulta copago, red IPS y condiciones de atencion para este servicio.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {
-  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coverages" component={CoveragesScreen} options={{ title: 'Cobertura' }} /></Tabs.Navigator>;
+  return <Tabs.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#008F5A', tabBarInactiveTintColor: '#8A918D' }}><Tabs.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} /><Tabs.Screen name="Coberturass" component={CoberturassScreen} options={{ title: 'Cobertura' }} /></Tabs.Navigator>;
 }
 
 export default function App() {
-  return <NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoverageDetail" component={DetailScreen} options={{ title: 'Detalle' }} /></Stack.Navigator></NavigationContainer>;
+  return <NavigationContainer><StatusBar style="dark" /><Stack.Navigator><Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} /><Stack.Screen name="CoberturasDetail" component={DetailScreen} options={{ title: 'Detalle' }} /></Stack.Navigator></NavigationContainer>;
 }
 
 const styles = StyleSheet.create({
@@ -115,4 +115,5 @@ const styles = StyleSheet.create({
   detailTitle: { color: '#075E43', fontSize: 32, fontWeight: '800' },
   detailText: { color: '#68716E', fontSize: 17, lineHeight: 26 },
 });
+
 

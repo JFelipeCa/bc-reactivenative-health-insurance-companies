@@ -1,23 +1,19 @@
-# Health Coverage Colombia
+﻿# Health Coverage Colombia
 
-Generic React Native learning app for the health insurance company domain in Colombia. It models plans, copayments, EPS/IPS networks, and covered services without representing a specific insurer.
+Educational Expo and React Native project for the health coverage domain in Colombia. Sample plans and copayments are illustrative and do not represent a specific insurer.
 
 ## Week 2: Lists, Inputs, and Styling
 
-### Goals
+This branch adds a searchable list of ten sample health coverages, pull to refresh, and list empty/loading states.
 
-- [x] Render coverage items with `FlatList`.
-- [x] Search coverage in real time with `TextInput`.
-- [x] Provide ten health coverage items.
-- [x] Add pull-to-refresh behavior.
-- [x] Apply reusable styles and conditional selected-plan styling.
+## Source layout
 
-Week 2 is complete on the `week-2` branch and ready for review.
+Application code lives under src/: screens, navigation, API, components, state, theme, hooks, and domain types are grouped by responsibility. Some folders are scaffolds for later weekly lessons.
 
-## Run with pnpm
+## Run
 
-```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm start
 pnpm typecheck
-```
+
+See [the weekly criteria](docs/ENTREGAS_SEMANALES.md) and [the source layout](docs/ESTRUCTURA.md).

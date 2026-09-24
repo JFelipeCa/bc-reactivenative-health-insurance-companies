@@ -2,7 +2,7 @@
 set -eu
 
 if ! command -v pnpm >/dev/null 2>&1; then
-  echo "Error: pnpm no está instalado. Instálalo antes de iniciar Expo." >&2
+  echo "Error: pnpm is not installed. Install it before starting Expo." >&2
   exit 1
 fi
 

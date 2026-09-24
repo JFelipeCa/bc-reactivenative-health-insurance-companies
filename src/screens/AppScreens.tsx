@@ -50,10 +50,11 @@ function HomeScreen({ navigation }: { navigation: any }) {
       <ScrollView contentContainerStyle={styles.homeContent} showsVerticalScrollIndicator={false}>
         <Text style={styles.eyebrow}>COBERTURA DE SALUD COLOMBIA</Text>
         <Text style={styles.title}>Tu cobertura de salud en Colombia.</Text>
-        <View style={styles.hero}>
+        <View style={styles.hero}><View style={styles.heroCopy}>
           <Text style={styles.heroKicker}>{String.fromCodePoint(0x1F49A)}  SISTEMA DE SALUD COLOMBIANO</Text>
           <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
           <Text style={styles.heroText}>Consulta opciones de cobertura y redes EPS e IPS.</Text>
+          </View>
           <Image accessibilityLabel="Healthcare consultation" source={{ uri: healthcareImage }} style={styles.heroImage} />
         </View>
         <Text style={styles.sectionTitle}>{String.fromCodePoint(0x2728)}  Accesos rápidos</Text>
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
   eyebrow: { color: '#008F5A', fontSize: 12, fontWeight: '800', letterSpacing: 1.8 },
   title: { color: '#075E43', fontSize: 28, fontWeight: '800', marginTop: 7 },
   hero: { backgroundColor: '#DFF3E8', borderRadius: 22, alignItems: 'center', flexDirection: 'row', gap: 12, overflow: 'hidden', padding: 22, marginTop: 10 },
+  heroCopy: { flex: 1, gap: 12 },
   heroImage: { borderRadius: 14, height: 120, width: 90 },
   heroKicker: { color: '#008F5A', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
   heroTitle: { color: '#075E43', fontSize: 24, fontWeight: '800', lineHeight: 29 },

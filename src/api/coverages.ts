@@ -1,4 +1,6 @@
-﻿export type RemoteCoverage = {
+declare const process: { env: { EXPO_PUBLIC_API_URL?: string } };
+
+export type RemoteCoverage = {
   id: string;
   name: string;
   category: string;

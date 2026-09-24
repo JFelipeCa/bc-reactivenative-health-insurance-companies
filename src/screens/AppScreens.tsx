@@ -10,7 +10,7 @@ type RootStackParamList = { MainTabs: undefined; CoberturasDetail: { coverage: C
 type TabParamList = { Home: undefined; Coberturass: undefined };
 
 const coverages: Coberturas[] = [
-  { id: '1', name: 'Consulta general', category: 'Consulta', detail: 'Citas presenciales y virtuales en tu red de atencion.' },
+  { id: '1', name: 'Consulta general', category: 'Consulta', detail: 'Citas presenciales y virtuales en tu red de atención.' },
   { id: '2', name: 'Medicina familiar', category: 'Consulta', detail: 'acompañamiento para todas las personas de tu hogar.' },
   { id: '3', name: 'pediatría', category: 'Especialidad', detail: 'Cuidado especializado para niños y adolescentes.' },
   { id: '4', name: 'Urgencias', category: 'atención inmediata', detail: 'Red disponible las 24 horas, todos los días.' },
@@ -18,7 +18,7 @@ const coverages: Coberturas[] = [
   { id: '6', name: 'odontología', category: 'Bienestar', detail: 'prevención y tratamientos dentales.' },
   { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Psicologia y acompanamiento emocional.' },
   { id: '8', name: 'Laboratorio', category: 'Diagnostico', detail: 'Examenes con tarifas preferenciales.' },
-  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'acompañamiento antes y despues del parto.' },
+  { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'acompañamiento antes y después del parto.' },
   { id: '10', name: 'Chequeo anual', category: 'prevención', detail: 'Una revision completa cada ano.' },
 ];
 
@@ -35,14 +35,14 @@ function HomeScreen({ navigation }: { navigation: any }) {
         <View style={styles.hero}>
           <Text style={styles.heroKicker}>COLOMBIA · EPS + IPS</Text>
           <Text style={styles.heroTitle}>Compara planes, copagos y beneficios.</Text>
-          <Text style={styles.heroText}>Consulta opciones de cobertura y redes de atencion.</Text>
+          <Text style={styles.heroText}>Consulta opciones de cobertura y redes de atención.</Text>
         </View>
         <Text style={styles.sectionTitle}>Encuentra tu cobertura</Text>
         <Pressable style={styles.actionCard} onPress={() => navigation.navigate('Coberturass')}>
           <View><Text style={styles.actionTitle}>Explorar cobertura</Text><Text style={styles.actionText}>Consulta servicios y red IPS.</Text></View>
           <Text style={styles.arrow}>›</Text>
         </Pressable>
-        <View style={styles.benefits}><Text style={styles.sectionTitle}>Beneficios esenciales</Text><View style={styles.benefitRow}><Text style={styles.benefitPill}>Ã¢Å“â€œ Medicina general</Text><Text style={styles.benefitPill}>Ã¢Å“â€œ Urgencias 24/7</Text><Text style={styles.benefitPill}>Ã¢Å“â€œ Telemedicina</Text></View></View>
+        <View style={styles.benefits}><Text style={styles.sectionTitle}>Beneficios esenciales</Text><View style={styles.benefitRow}><Text style={styles.benefitPill}>✓ Medicina general</Text><Text style={styles.benefitPill}>✓ Urgencias 24/7</Text><Text style={styles.benefitPill}>✓ Telemedicina</Text></View></View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -67,7 +67,7 @@ function CoberturassScreen({ navigation }: { navigation: any }) {
 
 function DetailScreen({ route }: { route: { params: { coverage: Coberturas } } }) {
   const { coverage } = route.params;
-  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>COBERTURA DE SALUD COLOMBIA</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Consulta copago, red IPS y condiciones de atencion para este servicio.</Text></View></View></SafeAreaView>;
+  return <SafeAreaView style={styles.safeArea}><View style={styles.detailContent}><Text style={styles.eyebrow}>{coverage.category.toUpperCase()}</Text><Text style={styles.detailTitle}>{coverage.name}</Text><Text style={styles.detailText}>{coverage.detail}</Text><View style={styles.infoCard}><Text style={styles.infoKicker}>COBERTURA DE SALUD COLOMBIA</Text><Text style={styles.infoTitle}>Disponible en tu plan</Text><Text style={styles.infoText}>Consulta copago, red IPS y condiciones de atención para este servicio.</Text></View></View></SafeAreaView>;
 }
 
 function MainTabs() {
@@ -115,5 +115,6 @@ const styles = StyleSheet.create({
   detailTitle: { color: '#075E43', fontSize: 32, fontWeight: '800' },
   detailText: { color: '#68716E', fontSize: 17, lineHeight: 26 },
 });
+
 
 

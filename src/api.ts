@@ -27,3 +27,4 @@ export async function fetchCoberturass(): Promise<RemoteCoberturas[]> {
   }));
 }
 
+

@@ -5,8 +5,8 @@ Aplicación educativa con Expo y React Native para explorar planes y coberturas 
 ## Requisitos
 
 - Node.js 22.13 o superior y pnpm 11.
-- Expo Go para las pantallas y animaciones.
-- Un development build de iOS o Android para probar la caché MMKV.
+- Expo Go para probar las pantallas con caché en memoria.
+- Un development build de iOS o Android para persistir la caché con MMKV.
 
 ## Instalación y ejecución
 

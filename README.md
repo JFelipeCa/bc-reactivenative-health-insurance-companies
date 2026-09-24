@@ -12,7 +12,7 @@ Application code lives under src/: screens, navigation, API, components, state, 
 
 ## Run
 
-Desde la carpeta raÃ­z, ejecuta estos comandos en PowerShell, Git Bash o la terminal de VS Code:
+Desde la carpeta raíz, ejecuta estos comandos en PowerShell, Git Bash o la terminal de VS Code:
 
 ```powershell
 git switch week-3
@@ -20,9 +20,9 @@ pnpm install --frozen-lockfile
 pnpm start -- --clear
 ```
 
-Espera el cÃ³digo QR de Expo y Ã¡brelo con Expo Go. MantÃ©n la terminal abierta mientras usas la aplicaciÃ³n; para detenerla, presiona Ctrl+C. Si vuelves a iniciar Expo o cambias de rama, vuelve a ejecutar pnpm start -- --clear para descartar la cachÃ© anterior.
+Espera el código QR de Expo y ábrelo con Expo Go. Mantén la terminal abierta mientras usas la aplicación; para detenerla, presiona Ctrl+C. Si vuelves a iniciar Expo o cambias de rama, vuelve a ejecutar pnpm start -- --clear para descartar la caché anterior.
 
-Para las instrucciones de las nueve semanas, consulta [la guÃ­a de inicio](docs/INICIO_POR_SEMANA.md).
+Para las instrucciones de las nueve semanas, consulta [la guía de inicio](docs/INICIO_POR_SEMANA.md).
 zen-lockfile
 pnpm start
 pnpm typecheck

@@ -43,8 +43,8 @@ const coverages: Coberturas[] = [
   { id: '4', name: 'Urgencias', category: 'atención inmediata', detail: 'Red IPS disponible las 24 horas.', icon: '+' },
   { id: '5', name: 'Telemedicina', category: 'Digital', detail: 'Consulta desde casa con profesionales de tu red.', icon: 'o' },
   { id: '6', name: 'odontología', category: 'Bienestar', detail: 'prevención y tratamientos con copago informado.', icon: '◇' },
-  { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'Psicologia y acompanamiento emocional.', icon: 'o' },
-  { id: '8', name: 'Laboratorio clinico', category: 'Diagnostico', detail: 'Examenes en IPS autorizadas.', icon: '#' },
+  { id: '7', name: 'Salud mental', category: 'Bienestar', detail: 'psicología y acompañamiento emocional.', icon: 'o' },
+  { id: '8', name: 'Laboratorio clinico', category: 'diagnóstico', detail: 'exámenes en IPS autorizadas.', icon: '#' },
   { id: '9', name: 'Maternidad', category: 'Especialidad', detail: 'acompañamiento antes y después del parto.', icon: '♥' },
   { id: '10', name: 'Chequeo anual', category: 'prevención', detail: 'revisión completa con tu red de atención.', icon: '✓' },
 ];
@@ -55,11 +55,11 @@ export default function HomeScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const activePlan = plans.find((plan) => plan.id === selectedPlan) ?? plans[1];
   const normalizedQuery = query.trim().toLowerCase();
-  const filteredCoberturass = coverages.filter((coverage) =>
+  const filteredcoverages = coverages.filter((coverage) =>
     `${coverage.name} ${coverage.category} ${coverage.detail}`.toLowerCase().includes(normalizedQuery),
   );
 
-  const refreshCoberturass = () => {
+  const refreshcoverages = () => {
     setRefreshing(true);
     setTimeout(() => setRefreshing(false), 600);
   };
@@ -69,10 +69,10 @@ export default function HomeScreen() {
       <StatusBar style="dark" />
       <FlatList
         contentContainerStyle={styles.content}
-        data={filteredCoberturass}
+        data={filteredcoverages}
         keyExtractor={(item) => item.id}
         keyboardShouldPersistTaps="handled"
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshCoberturass} tintColor="#008F5A" />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshcoverages} tintColor="#008F5A" />}
         ListHeaderComponent={
           <View style={styles.headerContent}>
             <View style={styles.header}>
@@ -115,8 +115,8 @@ export default function HomeScreen() {
               })}
             </View>
             <View style={styles.coverageHeading}>
-              <View><Text style={styles.sectionEyebrow}>RED DE ATENCION</Text><Text style={styles.sectionTitle}>Servicios incluidos</Text></View>
-              <Text style={styles.counter}>{filteredCoberturass.length} resultados</Text>
+              <View><Text style={styles.sectionEyebrow}>RED DE atención</Text><Text style={styles.sectionTitle}>Servicios incluidos</Text></View>
+              <Text style={styles.counter}>{filteredcoverages.length} resultados</Text>
             </View>
             <TextInput accessibilityLabel="Buscar cobertura" onChangeText={setQuery} placeholder="Busca medicina, urgencias..." placeholderTextColor="#8A918D" style={styles.searchInput} value={query} />
           </View>

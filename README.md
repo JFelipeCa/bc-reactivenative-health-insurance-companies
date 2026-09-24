@@ -1,46 +1,19 @@
-# Health Coverage Colombia
+﻿# Health Coverage Colombia
 
-Generic React Native learning app for the health insurance company domain in Colombia. It models plans, copayments, EPS/IPS networks, favorites, and shared member state without representing a specific insurer.
+Educational Expo and React Native project for the health coverage domain in Colombia. Sample plans and copayments are illustrative and do not represent a specific insurer.
 
-## Week 4: Global State
+## Week 4: Global State with Zustand
 
-### Goals
+This branch adds shared selected-plan and favorite-coverage state with persistence between launches.
 
-- [x] Install and configure Zustand.
-- [x] Keep the active health plan in a shared store.
-- [x] Expose shared state across Home, Coverage, and Detail screens.
-- [x] Track favorite coverage identifiers in the store.
+## Source layout
 
-Week 4 is complete on the `week-4` branch and ready for review.
+Application code lives under src/: screens, navigation, API, components, state, theme, hooks, and domain types are grouped by responsibility. Some folders are scaffolds for later weekly lessons.
 
-## Run with pnpm
+## Run
 
-```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm start
 pnpm typecheck
-```
-## Health Coverage Colombia
 
-Aplicacion móvil de una empresa de seguros de salud, desarrollada progresivamente a partir del bootcamp de React Native.
-
-## Progreso
-
-- Semana 1: Core Components y Flexbox (`semana-1`)
-- Semana 2: Listas, inputs y estilos
-- Semana 3: Navegacion
-- Semana 4: Estado global con Zustand
-- Semana 5: Networking con TanStack Query
-- Semana 6: Formularios y validacion
-- Semana 7: Persistencia local
-- Semana 8: Autenticacion
-- Semana 9: Animaciones basicas
-
-Cada semana se desarrolla en una rama independiente y se detiene para revision antes de continuar.
-
-## Ejecutar
-
-```bash
-npm install
-npx expo start
-```
+See [the weekly criteria](docs/ENTREGAS_SEMANALES.md) and [the source layout](docs/ESTRUCTURA.md).

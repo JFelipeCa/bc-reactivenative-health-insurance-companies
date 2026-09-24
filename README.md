@@ -43,3 +43,17 @@ Consulta [la guía de estructura](docs/ESTRUCTURA.md) y [las entregas semanales]
 ## Alcance de la demostración
 
 El catálogo y los copagos son datos ficticios. El acceso de prueba utiliza el servicio público DummyJSON, y el formulario de afiliación solo valida los campos: no envía solicitudes. No ingreses datos personales reales. OAuth requiere un cliente registrado; el backend de coberturas es opcional y se configura por variable de entorno.
+
+## InstalaciÃ³n y ejecuciÃ³n
+
+Desde la carpeta raÃ­z, ejecuta estos comandos en PowerShell, Git Bash o la terminal de VS Code:
+
+```powershell
+git switch week-9
+pnpm install --frozen-lockfile
+pnpm start -- --clear
+```
+
+Espera el cÃ³digo QR de Expo y Ã¡brelo con Expo Go. MantÃ©n la terminal abierta mientras usas la aplicaciÃ³n; para detenerla, presiona Ctrl+C. Si vuelves a iniciar Expo o cambias de rama, vuelve a ejecutar pnpm start -- --clear para descartar la cachÃ© anterior.
+
+Para las instrucciones de las nueve semanas, consulta [la guÃ­a de inicio](docs/INICIO_POR_SEMANA.md).

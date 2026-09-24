@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { ActionCard } from '../components/ActionCard';
 import { useHealthStore } from '../store';
+import { useLogout } from '../hooks/useAuth';
 import type { TabParamList } from '../types/coverage';
 import { colors } from '../theme';
 
@@ -19,7 +20,7 @@ export function HomeScreen() {
   const navigation = useNavigation<Navigation>();
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   const selectPlan = useHealthStore((state) => state.selectPlan);
-  const signOut = useHealthStore((state) => state.signOut);
+  const logout = useLogout();
   const entrance = useRef(new Animated.Value(0)).current;
   const slide = useRef(new Animated.Value(18)).current;
 
@@ -61,7 +62,7 @@ export function HomeScreen() {
       </Animated.View>
       <ActionCard title="Solicitar afiliación" description="Completa el formulario de orientación." onPress={() => navigation.getParent()?.navigate('Enrollment' as never)} />
       <View style={styles.info}><Text style={styles.kicker}>PLAN SELECCIONADO</Text><Text style={styles.planName}>{selectedPlan}</Text><Text style={styles.infoBody}>Precios y servicios de demostración para el proyecto académico.</Text></View>
-      <Pressable accessibilityRole="button" onPress={signOut}><Text style={styles.signOut}>Cerrar sesión</Text></Pressable>
+      <Pressable accessibilityRole="button" onPress={() => void logout()}><Text style={styles.signOut}>Cerrar sesión</Text></Pressable>
     </ScrollView>
   );
 }

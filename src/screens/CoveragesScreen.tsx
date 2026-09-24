@@ -3,7 +3,7 @@ import { FlatList, RefreshControl, StyleSheet, Text, TextInput, View } from 'rea
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CoverageCard } from '../components/CoverageCard';
-import { useCoverages } from '../hooks/useCoverages';
+import { useCoverages, useToggleFavorite } from '../hooks/useCoverages';
 import { useHealthStore } from '../store';
 import type { RootStackParamList } from '../types/coverage';
 import { colors } from '../theme';
@@ -15,7 +15,7 @@ export function CoveragesScreen() {
   const navigation = useNavigation<Navigation>();
   const { data = [], isError, isFetching, isLoading, refetch } = useCoverages();
   const favorites = useHealthStore((state) => state.favoriteCoverages);
-  const toggleFavorite = useHealthStore((state) => state.toggleFavorite);
+  const favoriteMutation = useToggleFavorite();
   const selectedPlan = useHealthStore((state) => state.selectedPlan);
   const filtered = useMemo(() => data.filter((item) => `${item.name} ${item.category}`.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase())), [data, search]);
 
@@ -28,7 +28,7 @@ export function CoveragesScreen() {
     refreshControl={<RefreshControl refreshing={isFetching} onRefresh={() => void refetch()} tintColor={colors.primary} />}
     ListHeaderComponent={<View style={styles.header}><Text style={styles.eyebrow}>RED DE ATENCIÓN</Text><Text style={styles.title}>Coberturas</Text><Text style={styles.summary}>Plan: {selectedPlan} · {favorites.length} favoritas</Text><TextInput accessibilityLabel="Buscar coberturas" value={search} onChangeText={setSearch} placeholder="Buscar servicio o especialidad…" placeholderTextColor="#8A918D" style={styles.search} /><Text style={styles.status}>{isFetching ? 'Actualizando coberturas…' : 'Catálogo de demostración'}</Text></View>}
     ListEmptyComponent={<Text style={styles.empty}>{isLoading ? 'Cargando coberturas…' : isError ? 'No se pudieron cargar las coberturas. Desliza para reintentar.' : 'No hay coberturas que coincidan con la búsqueda.'}</Text>}
-    renderItem={({ item }) => <CoverageCard item={item} favorite={favorites.includes(item.id)} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })} onToggleFavorite={() => toggleFavorite(item.id)} />}
+    renderItem={({ item }) => <CoverageCard item={item} favorite={favorites.includes(item.id)} onPress={() => navigation.navigate('CoverageDetail', { coverage: item })} onToggleFavorite={() => favoriteMutation.mutate({ id: item.id, nextValue: !favorites.includes(item.id) })} />}
     showsVerticalScrollIndicator={false}
   />;
 }

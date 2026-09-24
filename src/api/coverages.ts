@@ -1,4 +1,15 @@
 import type { Coverage } from '../types/coverage';
+import { z } from 'zod';
+import { apiBaseUrl, apiClient } from './client';
+import { readCachedCoverages, writeCachedCoverages } from './mmkvCache';
+
+const coverageSchema = z.array(z.object({
+  id: z.string(),
+  name: z.string(),
+  category: z.string(),
+  detail: z.string(),
+  monthlyCopay: z.number().nonnegative(),
+}));
 
 // Curated sample data for this learning project; it does not represent an insurer.
 const catalog: Coverage[] = [
@@ -15,8 +26,26 @@ const catalog: Coverage[] = [
 ];
 
 export async function fetchCoverages(): Promise<Coverage[]> {
-  // Keep an asynchronous boundary so this function can be replaced by a real API.
-  return catalog;
+  if (!apiBaseUrl) {
+    const cached = readCachedCoverages();
+    return cached ? coverageSchema.parse(JSON.parse(cached)) : catalog;
+  }
+
+  try {
+    const { data } = await apiClient.get<unknown>('/coverages');
+    const coverages = coverageSchema.parse(data);
+    writeCachedCoverages(JSON.stringify(coverages));
+    return coverages;
+  } catch (error) {
+    const cached = readCachedCoverages();
+    if (cached) return coverageSchema.parse(JSON.parse(cached));
+    throw error;
+  }
 }
 
 export const coverageCatalog = catalog;
+
+export async function setRemoteFavorite(coverageId: string, favorite: boolean): Promise<void> {
+  if (!apiBaseUrl) return;
+  await apiClient.put(`/coverages/${encodeURIComponent(coverageId)}/favorite`, { favorite });
+}

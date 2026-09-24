@@ -1,17 +1,22 @@
-# Criterios de entrega por semana
+# Entregas por semana
 
-Las ramas semanales documentan una progresión; cada README debe describir solo el incremento que esa rama demuestra y señalar las limitaciones que aún conserva.
+Las ramas `week-1` a `week-9` conservan su progresión. Esta tabla registra lo que muestra la versión final y sus dependencias externas para que la documentación no dé por integrada una función que requiere configuración.
 
-| Rama | Criterios que debe demostrar |
-| --- | --- |
-| `week-1` | Expo ejecutable; `View`, `Text`, `Image`, `ScrollView`, `Pressable` y `TouchableOpacity`; Flexbox; `StyleSheet.create`; al menos tres tarjetas de planes/coberturas. |
-| `week-2` | `FlatList` con al menos diez elementos, separadores, pull-to-refresh y búsqueda en tiempo real con `TextInput`. |
-| `week-3` | Stack y tabs anidados; dos tabs y detalle; paso de parámetros; rutas tipadas. |
-| `week-4` | Store Zustand tipado, acciones y selectores; estado compartido de plan/favoritos; persistencia AsyncStorage. |
-| `week-5` | `useQuery`, estados loading/error/vacío, `useMutation` e invalidación de caché; tipos para la capa API; el estado del servidor no se guarda en Zustand. |
-| `week-6` | Formularios de creación/edición con `Controller`, React Hook Form y Zod; errores por campo y estados de carga. |
-| `week-7` | Preferencias/caché sin conexión; AsyncStorage, MMKV y SecureStore aplicados a tipos de datos distintos; declarar cuándo hace falta development build. |
-| `week-8` | Stack protegido; JWT de un proveedor de demostración, SecureStore, `/auth/me`, logout/renovación e interceptor; OAuth PKCE documentado/configurado con credenciales externas. |
-| `week-9` | Tres animaciones distintas, `Animated.timing`, `Animated.spring`, interpolación, `LayoutAnimation`, entrada/salida, progreso y feedback táctil. |
+| Rama | Objetivo | Implementación y alcance |
+| --- | --- | --- |
+| `week-1` | Componentes base y Flexbox | Inicio con tarjetas de planes y estilos con `StyleSheet`. |
+| `week-2` | Listas, inputs y estilos | Diez coberturas, `FlatList`, búsqueda en tiempo real, refresco y estados de lista. |
+| `week-3` | React Navigation | Dos tabs, stack de detalle y paso de parámetros tipados. |
+| `week-4` | Estado global Zustand | Plan y favoritos compartidos, persistidos con AsyncStorage. |
+| `week-5` | Networking y TanStack Query | Axios, `useQuery`, estados de carga/error/vacío y mutación de favoritos con invalidación. Con `EXPO_PUBLIC_API_URL` vacío se usa el catálogo local; el servicio de cobertura real debe proporcionarlo el aprendiz. |
+| `week-6` | Formularios y validación | React Hook Form, `Controller` y Zod validan nombre, correo, teléfono e identificador. Solo se incluye el alta local; el servidor de afiliación y la edición de perfil no están configurados. |
+| `week-7` | Persistencia local | AsyncStorage guarda preferencias; MMKV guarda caché de coberturas; SecureStore guarda tokens. MMKV requiere un development build. |
+| `week-8` | Autenticación | Login de prueba, `/auth/me`, interceptor de Axios, renovación con refresh token, logout y OAuth Authorization Code + PKCE. OAuth requiere cliente y URI registrados. |
+| `week-9` | Animaciones | Entrada con timing y spring, rotación interpolada, `LayoutAnimation`, feedback al tocar y progreso animado del formulario. |
 
-No se deben marcar como completas integraciones que dependan de un backend, cliente OAuth o build nativo si esos recursos no están configurados. En esta aplicación no se solicitan datos personales reales.
+## Límites de los servicios
+
+- DummyJSON se usa solo para practicar el flujo de tokens; no autentica afiliados de una aseguradora.
+- Para cobertura remota, configura un backend que implemente las rutas indicadas en el README. El proyecto no crea ese backend.
+- Los formularios no envían información personal. No uses datos reales en la aplicación.
+- OAuth no se puede completar hasta registrar un cliente con el proveedor y autorizar el URI de redirección.
